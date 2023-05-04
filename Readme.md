@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Софья Пешехонова](https://up.htmlacademy.ru/react/12/user/2253051).
-* Наставник: [Павел Белик](https://htmlacademy.ru/profile/id84572).
+* Наставник: [Олег Глущенко](https://htmlacademy.ru/profile/id305355).
 
 ---
 
