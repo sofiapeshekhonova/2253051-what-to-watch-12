@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants';
 import { MovieProps } from '../../types/movie/movie';
 
 type Props = {
@@ -12,7 +14,7 @@ function Movie({movie}: Props): JSX.Element {
         <img src={movie.posterImage} alt={movie.name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">{movie.name}</a>
+        <Link to={AppRoute.Film} className="small-film-card__link">{movie.name}</Link>
       </h3>
     </article>
   );

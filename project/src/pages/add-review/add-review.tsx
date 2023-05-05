@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
+import { AppRoute } from '../../constants';
 
 function AddReview(): JSX.Element {
   return (
@@ -8,7 +10,18 @@ function AddReview(): JSX.Element {
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
         </div>
         <h1 className="visually-hidden">WTW</h1>
-        <Header />
+        <Header>
+          <nav className="breadcrumbs">
+            <ul className="breadcrumbs__list">
+              <li className="breadcrumbs__item">
+                <Link to={AppRoute.Film} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+              </li>
+              <li className="breadcrumbs__item">
+                <a className="breadcrumbs__link">Add review</a>
+              </li>
+            </ul>
+          </nav>
+        </Header>
         <div className="film-card__poster film-card__poster--small">
           <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
