@@ -20,7 +20,7 @@ function App(): JSX.Element {
         />
         <Route path={AppRoute.Login} element={<SignIn />} />
         <Route path={AppRoute.Player} element={<Player />} />
-        <Route path={AppRoute.Review} element={<AddReview />} />
+        <Route path={AppRoute.Review} element={<AddReview movies={movies}/>} />
         <Route path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
@@ -28,7 +28,7 @@ function App(): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Film} element={<Film />} />
+        <Route path={AppRoute.Film} element={<Film movies={movies}/>} />
         <Route path={AppRoute.NotFoundPage} element={<NotFoundScreen />} />
       </Routes>
     </BrowserRouter>
