@@ -4,14 +4,27 @@ import { MovieProps } from '../../types/movie/movie';
 
 type Props = {
   movie: MovieProps;
+  setActiveMovieCard: (id: number | null) => void;
 }
 
-function Movie({movie}: Props): JSX.Element {
+function Movie({movie, setActiveMovieCard}: Props): JSX.Element {
   const { id } = movie;
   const movieId = `/films/${id}`;
 
+  function mouseOverHandler() {
+    if (setActiveMovieCard !== undefined) {
+      setActiveMovieCard(id);
+    }
+  }
+
+  function mouseLeaveHandler() {
+    if (setActiveMovieCard !== undefined) {
+      setActiveMovieCard(null);
+    }
+  }
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card" onMouseOver={mouseOverHandler} onMouseLeave={mouseLeaveHandler}>
       <div className="small-film-card__image">
         <img src={movie.previewImage} alt={movie.name} width="280" height="175" />
       </div>

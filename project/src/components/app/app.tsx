@@ -19,12 +19,12 @@ function App(): JSX.Element {
           element={<Main movies={movies} promoMovie={promoMovie} />}
         />
         <Route path={AppRoute.Login} element={<SignIn />} />
-        <Route path={AppRoute.Player} element={<Player />} />
+        <Route path={AppRoute.Player} element={<Player movies={movies}/>} />
         <Route path={AppRoute.Review} element={<AddReview movies={movies}/>} />
         <Route path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyList />
+              <MyList movies={movies}/>
             </PrivateRoute>
           }
         />

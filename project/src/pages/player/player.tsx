@@ -1,7 +1,21 @@
-function Player(): JSX.Element {
+import { useParams } from 'react-router-dom';
+import { MovieProps } from '../../types/movie/movie';
+
+type Props = {
+  movies: MovieProps[];
+}
+
+function Player({movies}: Props): JSX.Element {
+  const movieId = Number(useParams().id);
+  const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
+
+  if (movie === undefined) {
+    return <p>Видео не найдено</p>;
+  }
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src="#" className="player__video" poster={movie.posterImage}></video>
       <button type="button" className="player__exit">Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
@@ -9,7 +23,7 @@ function Player(): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{movie.runTime}</div>
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play">
