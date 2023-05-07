@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom';
-//import { AppRoute } from '../../constants';
+import { useEffect, useState } from 'react';
 import { MovieProps } from '../../types/movie/movie';
+import MovieImage from '../movie-image/movie-image';
+import VideoCard from '../video-card/video-card';
 
 type Props = {
   movie: MovieProps;
-  setActiveMovieCard: (id: number | null) => void;
+ // setActiveMovieCard: (id: number | null) => void;
 }
 
-function Movie({movie, setActiveMovieCard}: Props): JSX.Element {
+function Movie({movie}: Props): JSX.Element {
   const { id } = movie;
   const movieId = `/films/${id}`;
+  const [activeVideo, setActiveVideo] = useState(false);
+  const [activeMovieCard, setActiveMovieCard] = useState<null | number>(null);
 
   function mouseOverHandler() {
     if (setActiveMovieCard !== undefined) {
@@ -23,14 +26,25 @@ function Movie({movie, setActiveMovieCard}: Props): JSX.Element {
     }
   }
 
+  useEffect(()=> {
+    if(activeMovieCard) {
+      const timer = setTimeout(() => {
+        setActiveVideo(true);
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+        setActiveVideo(false);
+      };
+    } else {
+      setActiveVideo(false);
+    }
+  }, [activeMovieCard]);
+
   return (
     <article className="small-film-card catalog__films-card" onMouseOver={mouseOverHandler} onMouseLeave={mouseLeaveHandler}>
-      <div className="small-film-card__image">
-        <img src={movie.previewImage} alt={movie.name} width="280" height="175" />
-      </div>
-      <h3 className="small-film-card__title">
-        <Link to={movieId} className="small-film-card__link">{movie.name}</Link>
-      </h3>
+      {!activeVideo ?
+        <MovieImage movie={movie} movieId={movieId}/> :
+        <VideoCard movie={movie} movieId={movieId}/>}
     </article>
   );
 }

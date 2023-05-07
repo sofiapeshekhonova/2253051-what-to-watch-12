@@ -1,0 +1,22 @@
+import { Link } from 'react-router-dom';
+import { MovieProps } from '../../types/movie/movie';
+
+type Props = {
+  movie: MovieProps;
+  movieId: string;
+}
+
+function MovieImage({movie, movieId}: Props) {
+  return (
+    <>
+      <div className="small-film-card__image">
+        <img src={movie.previewImage} alt={movie.name} width="280" height="175" />
+      </div>
+      <h3 className="small-film-card__title">
+        <Link to={movieId} className="small-film-card__link">{movie.name}</Link>
+      </h3>
+    </>
+  );
+}
+
+export default MovieImage;
