@@ -39,7 +39,7 @@ function Player({ movies }: Props): JSX.Element {
   }
   function findTime() {
     if(ref.current) {
-      setTimeLeft(ref.current.duration - ref.current.currentTime);
+      setTimeLeft(Math.floor(ref.current.duration - ref.current.currentTime));
     }
   }
 
