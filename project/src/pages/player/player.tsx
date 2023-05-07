@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { MovieProps } from '../../types/movie/movie';
 import { useEffect, useRef, useState } from 'react';
+import formatTime from '../../untils/untils';
 type Props = {
   movies: MovieProps[];
 }
@@ -43,19 +44,6 @@ function Player({ movies }: Props): JSX.Element {
     }
   }
 
-  function formatPlayerTime(time: number): string {
-    if (time > 3600) {
-      const hours = Math.floor(time / 3600);
-      const min = Math.floor(time % 3600 / 60);
-      const sec = time % 60;
-      return `${hours} : ${min} : ${sec}`;
-
-    } else {
-      const min = Math.floor(time / 60);
-      const sec = time % 60;
-      return `${min} : ${sec}`;
-    }
-  }
 
   return (
     <div className="player">
@@ -67,7 +55,7 @@ function Player({ movies }: Props): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
           </div>
-          <div className="player__time-value">{formatPlayerTime(timeLeft)}</div>
+          <div className="player__time-value">{formatTime(timeLeft)}</div>
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={stopVideo}>
