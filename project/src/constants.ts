@@ -55,5 +55,10 @@ export const STARS = [
   { id: 3, name: 'Rating 3' },
   { id: 2, name: 'Rating 2' },
   { id: 1, name: 'Rating 1' },
+];
 
+export const LINKS = [
+  { id: 1, name: 'Overview' },
+  { id: 2, name: 'Details' },
+  { id: 3, name: 'Reviews' },
 ];
