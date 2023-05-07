@@ -39,33 +39,20 @@ function Player({ movies }: Props): JSX.Element {
   }
   function findTime() {
     if(ref.current) {
-      //console.log(ref.current.duration - ref.current.currentTime)
-      // ref.current.duration - ref.current.currentTime
       setTimeLeft(ref.current.duration - ref.current.currentTime);
     }
   }
 
   function formatPlayerTime(time: number): string {
-    //duractionInSeconds = Math.floor(duractionInSeconds);
     if (time > 3600) {
       const hours = Math.floor(time / 3600);
       const min = Math.floor(time % 3600 / 60);
       const sec = time % 60;
-      if(sec < 10) {
-        return `${hours} : ${min} : 0${sec}`;
-      } else if (min < 10) {
-        return `${hours} : 0${min} : ${sec}`;
-      }
       return `${hours} : ${min} : ${sec}`;
 
     } else {
       const min = Math.floor(time / 60);
       const sec = time % 60;
-      if(sec < 10) {
-        return `${min} : 0${sec}`;
-      } else if (min < 10) {
-        return `0${min} : ${sec}`;
-      }
       return `${min} : ${sec}`;
     }
   }
@@ -80,7 +67,7 @@ function Player({ movies }: Props): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
           </div>
-          <div className="player__time-value">{formatPlayerTime(14550)}</div>
+          <div className="player__time-value">{formatPlayerTime(timeLeft)}</div>
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={stopVideo}>
