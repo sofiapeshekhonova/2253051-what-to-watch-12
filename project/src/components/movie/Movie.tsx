@@ -5,7 +5,6 @@ import VideoCard from '../video-card/video-card';
 
 type Props = {
   movie: MovieProps;
- // setActiveMovieCard: (id: number | null) => void;
 }
 
 function Movie({movie}: Props): JSX.Element {

@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { useState} from 'react';
+import { useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { MovieProps } from '../../types/movie/movie';
@@ -14,7 +14,7 @@ type Props = {
   movies: MovieProps[];
 }
 
-function Film({movies}: Props): JSX.Element {
+function Film({ movies }: Props): JSX.Element {
   const movieId = Number(useParams().id);
   const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
   const [activeLink, setActiveLink] = useState('Overview');
@@ -24,15 +24,15 @@ function Film({movies}: Props): JSX.Element {
   }
 
   const movieInformation = () => {
-    switch(activeLink){
+    switch (activeLink) {
       case 'Overview':
-        return <Overview movie={movie}/>;
+        return <Overview movie={movie} />;
       case 'Details':
-        return <Details movie={movie}/>;
+        return <Details movie={movie} />;
       case 'Reviews':
         return <Reviews />;
       default:
-        return <Overview movie={movie}/>;
+        return <Overview movie={movie} />;
     }
   };
 
@@ -57,14 +57,13 @@ function Film({movies}: Props): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button
-                  className="btn btn--play film-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
+                <button className="btn btn--play film-card__button" type="button">
+                  <Link to={`/player/${movie.id}`} className='btn--play__link'>
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s"></use>
+                    </svg>
+                    <span>Play</span>
+                  </Link>
                 </button>
                 <button
                   className="btn btn--list film-card__button"
@@ -99,7 +98,7 @@ function Film({movies}: Props): JSX.Element {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   {LINKS.map((li) => (
-                    <FilmNav key={li.id} name={li.name} setActiveLink={setActiveLink} activeLink={activeLink}/>
+                    <FilmNav key={li.id} name={li.name} setActiveLink={setActiveLink} activeLink={activeLink} />
                   ))}
                 </ul>
               </nav>

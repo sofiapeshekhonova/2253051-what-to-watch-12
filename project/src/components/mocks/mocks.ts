@@ -20,7 +20,7 @@ export const movies = [
     'released': 2019,
     'id': 1,
     'isFavorite': false,
-    'videoLink': 'https://12.react.pages.academy/static/film/video/bubbles.mp4',
+    'videoLink': 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
     'previewVideoLink': 'https://12.react.pages.academy/static/film/video/traffic.mp4'
   },
   {

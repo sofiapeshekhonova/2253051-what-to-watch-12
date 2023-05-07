@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom';
 import { MovieProps } from '../../types/movie/movie';
 import Header from '../header/header';
-
+import './film-card.css';
 type Props = {
   promoMovie: MovieProps;
 }
 
-function FilmCard({promoMovie}: Props) {
+function FilmCard({ promoMovie }: Props) {
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -28,10 +29,12 @@ function FilmCard({promoMovie}: Props) {
 
             <div className="film-card__buttons">
               <button className="btn btn--play film-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
+                <Link to={`/player/${promoMovie.id}`} className="btn--play__link">
+                  <svg viewBox="0 0 19 19" width="19" height="19">
+                    <use xlinkHref="#play-s"></use>
+                  </svg>
+                  <span>Play</span>
+                </Link>
               </button>
               <button className="btn btn--list film-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
