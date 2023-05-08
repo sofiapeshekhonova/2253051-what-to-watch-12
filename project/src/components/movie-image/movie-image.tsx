@@ -6,6 +6,10 @@ type Props = {
   movieId: string;
 }
 
+function handleClick() {
+  window.scrollTo(0, 0);
+}
+
 function MovieImage({movie, movieId}: Props) {
   return (
     <>
@@ -13,7 +17,7 @@ function MovieImage({movie, movieId}: Props) {
         <img src={movie.previewImage} alt={movie.name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <Link to={movieId} className="small-film-card__link">{movie.name}</Link>
+        <Link to={movieId} className="small-film-card__link" onClick={handleClick}>{movie.name}</Link>
       </h3>
     </>
   );
