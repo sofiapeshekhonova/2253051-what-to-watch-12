@@ -3,12 +3,6 @@ import { movies } from '../components/mocks/mocks';
 import { MovieProps } from '../types/movie/movie';
 import { changeGenre, changeMovies } from './action';
 
-// Функцию-редьюсер. Она принимает в качестве параметров текущий state
-//и действие (action).
-// Результатом выполнения редьюсера станет новое состояние.
-// Обратите внимание, для именования функций-редьюсеров применяются
-//существительные.
-
 type InitialState = {
   genre: string;
   movies: MovieProps[];

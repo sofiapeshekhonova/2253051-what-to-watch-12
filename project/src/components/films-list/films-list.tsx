@@ -3,12 +3,13 @@ import Movie from '../movie/Movie';
 
 type Props = {
   movies: MovieProps[];
+  countCards?: number;
 }
 
-function FilmList({movies}: Props): JSX.Element {
+function FilmList({movies, countCards}: Props): JSX.Element {
   return (
     <div className="catalog__films-list">
-      {movies.map((movie) => (
+      {movies.slice(0, countCards).map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
     </div>

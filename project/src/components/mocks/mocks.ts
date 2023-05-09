@@ -460,6 +460,98 @@ export const movies = [
     'videoLink': 'https://12.react.pages.academy/static/film/video/matrix.mp4',
     'previewVideoLink': 'https://12.react.pages.academy/static/film/video/traffic.mp4'
   },
+  {
+    'name': 'We need to talk about Kevin',
+    'posterImage': 'https://12.react.pages.academy/static/film/poster/We_need_to_talk_about_Kevin.jpg',
+    'previewImage': 'https://12.react.pages.academy/static/film/preview/we-need-to-talk-about-kevin.jpg',
+    'backgroundImage': 'https://12.react.pages.academy/static/film/background/We_need_to_talk_about_Kevin.jpg',
+    'backgroundColor': '#E1DFDE',
+    'description': 'Kevins mother struggles to love her strange child, despite the increasingly dangerous things he says and does as he grows up. But Kevin is just getting started, and his final act will be beyond anything anyone imagined.',
+    'rating': 3.8,
+    'scoresCount': 123240,
+    'director': 'Lynne Ramsay',
+    'starring': [
+      'Tilda Swinton',
+      'John C. Reilly',
+      'Ezra Miller'
+    ],
+    'runTime': 112,
+    'genre': 'Drama',
+    'released': 2011,
+    'id': 67,
+    'isFavorite': false,
+    'videoLink': 'https://12.react.pages.academy/static/film/video/bubbles.mp4',
+    'previewVideoLink': 'https://12.react.pages.academy/static/film/video/dog.mp4'
+  },
+  {
+    'name': 'Orlando',
+    'posterImage': 'https://12.react.pages.academy/static/film/poster/Orlando.jpg',
+    'previewImage': 'https://12.react.pages.academy/static/film/preview/orlando.jpg',
+    'backgroundImage': 'https://12.react.pages.academy/static/film/background/Orlando.jpg',
+    'backgroundColor': '#D8D3BD',
+    'description': 'Young nobleman Orlando is commanded by Queen Elizabeth I to stay forever young. Miraculously, he does just that. The film follows him as he moves through several centuries of British history, experiencing a variety of lives and relationships along the way, and even changing sex.',
+    'rating': 2.6,
+    'scoresCount': 12292,
+    'director': 'Sally Potter',
+    'starring': [
+      'Tilda Swinton',
+      'Billy Zane',
+      'Quentin Crisp'
+    ],
+    'runTime': 94,
+    'genre': 'Drama',
+    'released': 1992,
+    'id': 68,
+    'isFavorite': false,
+    'videoLink': 'https://12.react.pages.academy/static/film/video/bubbles.mp4',
+    'previewVideoLink': 'https://12.react.pages.academy/static/film/video/traffic.mp4'
+  },
+  {
+    'name': 'A Star Is Born',
+    'posterImage': 'https://12.react.pages.academy/static/film/poster/A_Star_Is_Born.jpg',
+    'previewImage': 'https://12.react.pages.academy/static/film/preview/A_Star_Is_Born.jpg',
+    'backgroundImage': 'https://12.react.pages.academy/static/film/background/A_Star_is_Born.jpg',
+    'backgroundColor': '#C4C0C0',
+    'description': 'A musician helps a young singer find fame as age and alcoholism send his own career into a downward spiral.',
+    'rating': 3.9,
+    'scoresCount': 244484,
+    'director': 'Bradley Cooper',
+    'starring': [
+      'Lady Gaga',
+      'Bradley Cooper',
+      'Sam Elliott'
+    ],
+    'runTime': 136,
+    'genre': 'Drama',
+    'released': 2018,
+    'id': 66,
+    'isFavorite': false,
+    'videoLink': 'https://12.react.pages.academy/static/film/video/bike.mp4',
+    'previewVideoLink': 'https://12.react.pages.academy/static/film/video/dog.mp4'
+  },
+  {
+    'name': 'The Revenant',
+    'posterImage': 'https://12.react.pages.academy/static/film/poster/Revenant.jpg',
+    'previewImage': 'https://12.react.pages.academy/static/film/preview/revenant.jpg',
+    'backgroundImage': 'https://12.react.pages.academy/static/film/background/Revenant.jpg',
+    'backgroundColor': '#92918B',
+    'description': 'A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.',
+    'rating': 4,
+    'scoresCount': 618498,
+    'director': 'Alejandro G. Iñárritu',
+    'starring': [
+      'Leonardo DiCaprio',
+      'Tom Hardy',
+      'Will Poulter'
+    ],
+    'runTime': 156,
+    'genre': 'Action',
+    'released': 2015,
+    'id': 65,
+    'isFavorite': false,
+    'videoLink': 'https://12.react.pages.academy/static/film/video/matrix.mp4',
+    'previewVideoLink': 'https://12.react.pages.academy/static/film/video/traffic.mp4'
+  },
 ];
 
 export const promoMovie = {
