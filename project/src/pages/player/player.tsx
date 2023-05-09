@@ -38,10 +38,15 @@ function Player({ movies }: Props): JSX.Element {
       setIsPlayMovie(true);
     }
   }
+
   function findTime() {
     if(ref.current) {
       setTimeLeft(Math.floor(ref.current.duration - ref.current.currentTime));
     }
+  }
+
+  function handleFullScreenClick() {
+    ref.current?.requestFullscreen();
   }
 
 
@@ -75,7 +80,7 @@ function Player({ movies }: Props): JSX.Element {
           </button>
 
           <div className="player__name">Transpotting</div>
-          <button type="button" className="player__full-screen">
+          <button type="button" className="player__full-screen" onClick={handleFullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>

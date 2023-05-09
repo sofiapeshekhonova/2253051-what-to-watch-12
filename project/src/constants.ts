@@ -51,3 +51,7 @@ export const LINKS = [
   { id: 2, name: 'Details' },
   { id: 3, name: 'Reviews' },
 ];
+
+export enum APIRoute {
+  Movies = '/films',
+}

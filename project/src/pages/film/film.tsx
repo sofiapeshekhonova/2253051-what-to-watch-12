@@ -110,7 +110,7 @@ function Film({ movies }: Props): JSX.Element {
       </section>
 
       <div className="page-content">
-        <MoreLikeThis genre={movie.genre} id={movie.id}/>
+        <MoreLikeThis genre={movie.genre} id={movie.id} movies={movies}/>
         <Footer />
       </div>
     </>

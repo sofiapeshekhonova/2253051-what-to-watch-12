@@ -7,7 +7,17 @@ export const changeGenre = createAction('changeGenre',
     payload: genre,
   }));
 
-export const changeMovies = createAction('changeMovies',
+export const loadMovies = createAction('data/loadMovies',
   (movies: MovieProps[]) => ({
     payload: movies,
+  }));
+
+export const setError = createAction('setError',
+  (error: string | null) => ({
+    payload: error
+  }));
+
+export const setLoadingStatus = createAction('data/loading',
+  (isLoading: boolean) => ({
+    payload: isLoading
   }));

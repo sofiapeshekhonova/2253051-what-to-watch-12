@@ -1,12 +1,13 @@
-import { movies } from '../mocks/mocks';
+import { MovieProps } from '../../types/movie/movie';
 import Movie from '../movie/Movie';
 
 type Props = {
   genre: string;
   id: number;
+  movies: MovieProps[];
 }
 
-function MoreLikeThis({genre, id}: Props) {
+function MoreLikeThis({genre, id, movies}: Props) {
 
   const sortMovies = movies.filter((movie) => movie.genre === genre && movie.id !== id).slice(0, 4);
 

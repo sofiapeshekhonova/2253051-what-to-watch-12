@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Main from '../../pages/main/main';
-import { movies, promoMovie } from '../../components/mocks/mocks';
+import { promoMovie } from '../../components/mocks/mocks';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import MyList from '../../pages/my-list/my-list';
@@ -9,8 +9,16 @@ import SignIn from '../../pages/sign-in/sign-in';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 function App(): JSX.Element {
+  const movies = useAppSelector((state) => state.movies);
+  const isLoading = useAppSelector((state) => state.isLoading);
+  if(isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <BrowserRouter>
       <Routes>

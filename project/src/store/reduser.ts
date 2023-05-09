@@ -1,18 +1,20 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { movies } from '../components/mocks/mocks';
+//import { movies } from '../components/mocks/mocks';
 import { MovieProps } from '../types/movie/movie';
-import { changeGenre, changeMovies } from './action';
+import { changeGenre, loadMovies, setLoadingStatus } from './action';
 
 type InitialState = {
   genre: string;
   movies: MovieProps[];
+  isLoading: boolean;
 };
 
 // Объект начального состояния жанр (используется для фильтров по жанру)
 //и список фильмов.
 const defaultState: InitialState = {
   genre:'All genres',
-  movies: movies
+  movies: [],
+  isLoading: false
 };
 
 const reducer = createReducer(defaultState, (builder) => {
@@ -20,8 +22,11 @@ const reducer = createReducer(defaultState, (builder) => {
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
     })
-    .addCase(changeMovies, (state, action) => {
+    .addCase(loadMovies, (state, action) => {
       state.movies = action.payload;
+    })
+    .addCase(setLoadingStatus, (state, action) => {
+      state.isLoading = action.payload;
     });
 });
 
