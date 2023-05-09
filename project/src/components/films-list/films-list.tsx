@@ -12,7 +12,6 @@ function FilmList({movies}: Props): JSX.Element {
         <Movie key={movie.id} movie={movie} />
       ))}
     </div>
-
   );
 }
 

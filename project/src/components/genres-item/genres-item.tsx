@@ -1,11 +1,17 @@
+import { MouseEvent } from 'react';
 
 type Props = {
   genre: string;
+  handleChangeGenre: (genre: string) => void;
 }
-function GenreItem({ genre }: Props) {
+function GenreItem({ genre, handleChangeGenre }: Props) {
+  function handleClick(e: MouseEvent<HTMLElement>) {
+    e.preventDefault();
+    handleChangeGenre(genre);
+  }
   return (
-    <li className="catalog__genres-item ">
-      <a href="#" className="catalog__genres-link">{genre}</a>
+    <li className="catalog__genres-item">
+      <a href="#" className="catalog__genres-link" onClick={handleClick}>{genre}</a>
     </li>
   );
 }

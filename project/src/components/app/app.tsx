@@ -8,7 +8,7 @@ import Film from '../../pages/film/film';
 import SignIn from '../../pages/sign-in/sign-in';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import PrivateRoute from '../ProtectedRoute/ProtectedRoute';
+import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
   return (
@@ -16,7 +16,7 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main movies={movies} promoMovie={promoMovie} />}
+          element={<Main promoMovie={promoMovie} />}
         />
         <Route path={AppRoute.Login} element={<SignIn />} />
         <Route path={AppRoute.Player} element={<Player movies={movies}/>} />
