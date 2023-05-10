@@ -6,7 +6,7 @@ import Player from '../../pages/player/player';
 import MyList from '../../pages/my-list/my-list';
 import Film from '../../pages/film/film';
 import SignIn from '../../pages/sign-in/sign-in';
-import { AppRoute, AuthorizationStatus } from '../../constants';
+import { AppRoute } from '../../constants';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';
@@ -15,6 +15,10 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 function App(): JSX.Element {
   const movies = useAppSelector((state) => state.movies);
   const isLoading = useAppSelector((state) => state.isLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  // const user = useAppSelector((state) => state.userInformation);
+
+  // console.log(authorizationStatus)
   if(isLoading) {
     return <LoadingScreen />;
   }
@@ -31,7 +35,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.Review} element={<AddReview movies={movies}/>} />
         <Route path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <MyList movies={movies}/>
             </PrivateRoute>
           }

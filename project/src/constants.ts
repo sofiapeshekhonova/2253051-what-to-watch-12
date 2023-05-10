@@ -54,4 +54,6 @@ export const LINKS = [
 
 export enum APIRoute {
   Movies = '/films',
+  Login = '/login',
+  Logout = '/logout'
 }

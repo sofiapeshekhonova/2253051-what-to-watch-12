@@ -1,14 +1,20 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
-//import { AuthorizationStatus } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 
 type Props = {
   children?: JSX.Element;
 }
 
 function Header({ children }: Props) {
-  return (
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  function handleClick() {
+    dispatch(logoutAction());
+  }
 
+  return (
     <header className="page-header user-page__head">
       <div className="logo">
         <Link to={AppRoute.Main} className="logo__link">
@@ -18,11 +24,7 @@ function Header({ children }: Props) {
         </Link>
       </div>
       {children}
-      {AuthorizationStatus.NoAuth ?
-        <div className="user-block">
-          <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>
-        </div>
-        :
+      {authorizationStatus === AuthorizationStatus.Auth ?
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -30,9 +32,13 @@ function Header({ children }: Props) {
             </div>
           </li>
           <li className="user-block__item">
-            <Link to={AppRoute.Login} className="user-block__link">Sign out</Link>
+            <Link to={AppRoute.Login} className="user-block__link" onClick={handleClick}>Sign out</Link>
           </li>
-        </ul>}
+        </ul>
+        :
+        <div className="user-block">
+          <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>
+        </div>}
     </header>
   );
 }
