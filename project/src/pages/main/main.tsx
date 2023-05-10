@@ -1,5 +1,4 @@
 import FilmCard from '../../components/film-card/film-card';
-import { MovieProps } from '../../types/movie/movie';
 import FilmList from '../../components/films-list/films-list';
 import GenreList from '../../components/genres-list/genres-list';
 import Footer from '../../components/footer/footer';
@@ -8,11 +7,7 @@ import { changeGenre } from '../../store/action';
 import ShowMore from '../../components/show-more/show-more';
 import { useState } from 'react';
 
-type Props = {
-  promoMovie: MovieProps;
-}
-
-function Main({ promoMovie }: Props): JSX.Element {
+function Main(): JSX.Element {
   const [countCards, setCountCards] = useState(8);
   const selectedGenre = useAppSelector((state) => state.genre);
   const dispatch = useAppDispatch();
@@ -37,7 +32,7 @@ function Main({ promoMovie }: Props): JSX.Element {
 
   return (
     <main >
-      <FilmCard promoMovie={promoMovie} />
+      <FilmCard />
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

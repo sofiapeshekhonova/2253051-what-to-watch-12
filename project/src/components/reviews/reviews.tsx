@@ -1,7 +1,8 @@
-import { reviews } from '../mocks/mocks';
+import { useAppSelector } from '../../hooks';
 import Review from '../review/review';
 
 function Reviews() {
+  const reviews = useAppSelector((state) => state.review);
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">

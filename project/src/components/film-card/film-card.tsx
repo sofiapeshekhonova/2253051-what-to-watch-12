@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
-import { MovieProps } from '../../types/movie/movie';
 import Header from '../header/header';
 import './film-card.css';
-type Props = {
-  promoMovie: MovieProps;
-}
+import { useAppSelector } from '../../hooks';
 
-function FilmCard({ promoMovie }: Props) {
+
+function FilmCard() {
+  const promoMovie = useAppSelector((state) => state.movie);
+
+  if(promoMovie === null) {
+    return <p>Информация по фильму не найдена</p>;
+  }
+
   return (
     <section className="film-card">
       <div className="film-card__bg">

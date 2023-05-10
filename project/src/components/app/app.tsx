@@ -1,6 +1,5 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Main from '../../pages/main/main';
-import { promoMovie } from '../../components/mocks/mocks';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import MyList from '../../pages/my-list/my-list';
@@ -16,10 +15,8 @@ function App(): JSX.Element {
   const movies = useAppSelector((state) => state.movies);
   const isLoading = useAppSelector((state) => state.isLoading);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  // const user = useAppSelector((state) => state.userInformation);
 
-  // console.log(authorizationStatus)
-  if(isLoading) {
+  if (isLoading) {
     return <LoadingScreen />;
   }
 
@@ -28,19 +25,25 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main promoMovie={promoMovie} />}
+          element={<Main />}
         />
         <Route path={AppRoute.Login} element={<SignIn />} />
-        <Route path={AppRoute.Player} element={<Player movies={movies}/>} />
-        <Route path={AppRoute.Review} element={<AddReview movies={movies}/>} />
+        <Route path={AppRoute.Player} element={<Player movies={movies} />} />
         <Route path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <MyList movies={movies}/>
+              <MyList movies={movies} />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Film} element={<Film movies={movies}/>} />
+        <Route path={AppRoute.Review}
+          element={
+            <PrivateRoute authorizationStatus={authorizationStatus}>
+              <AddReview movies={movies} />
+            </PrivateRoute>
+          }
+        />
+        <Route path={AppRoute.Film} element={<Film movies={movies} />} />
         <Route path={AppRoute.NotFoundPage} element={<NotFoundScreen />} />
       </Routes>
     </BrowserRouter>

@@ -1,23 +1,35 @@
 import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { MovieProps } from '../../types/movie/movie';
 import MoreLikeThis from '../../components/more-like-films/more-like-films';
 import Overview from '../../components/overview/overview';
-import { LINKS } from '../../constants';
+import { AuthorizationStatus, LINKS } from '../../constants';
 import FilmNav from './film-nav';
 import Reviews from '../../components/reviews/reviews';
 import Details from '../../components/details/details';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getMovieReview } from '../../store/api-actions';
 
 type Props = {
   movies: MovieProps[];
 }
 
 function Film({ movies }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
   const movieId = Number(useParams().id);
   const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const [activeLink, setActiveLink] = useState('Overview');
+
+  useEffect(()=> {
+    dispatch(getMovieReview(movieId));
+  },[]);
+
+  // useEffect(() => {
+  //   dispatch(getMovieReview(movieId));
+  // }, [dispatch, movieId]);
 
   if (movie === undefined) {
     return <p>Информация по фильму не найдена</p>;
@@ -75,9 +87,10 @@ function Film({ movies }: Props): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={`/films/${movie.id}/review`} className="btn film-card__button">
-                  Add review
-                </Link>
+                {authorizationStatus === AuthorizationStatus.Auth &&
+                  <Link to={`/films/${movie.id}/review`} className="btn film-card__button">
+                    Add review
+                  </Link>}
               </div>
             </div>
           </div>

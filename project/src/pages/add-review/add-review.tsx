@@ -5,13 +5,15 @@ import StarsInput from '../../components/stars-input/stars-input';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { STARS } from '../../constants';
 import './add-review.css';
-
-type Props = {
+import { useAppDispatch } from '../../hooks';
+import { postMovieReview } from '../../store/api-actions';
+type PropsPage = {
   movies: MovieProps[];
 }
 
-function AddReview({ movies }: Props): JSX.Element {
+function AddReview({ movies }: PropsPage): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const movieId = Number(useParams().id);
   const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
 
@@ -28,6 +30,7 @@ function AddReview({ movies }: Props): JSX.Element {
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
+    dispatch(postMovieReview(formData));
     setFormData({
       rating: 0,
       comment: '',

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../constants';
+import { AppRoute } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
@@ -9,7 +9,7 @@ type Props = {
 
 function Header({ children }: Props) {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const user = useAppSelector((state) => state.userInformation);
   function handleClick() {
     dispatch(logoutAction());
   }
@@ -24,7 +24,7 @@ function Header({ children }: Props) {
         </Link>
       </div>
       {children}
-      {authorizationStatus === AuthorizationStatus.Auth ?
+      {user ?
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">

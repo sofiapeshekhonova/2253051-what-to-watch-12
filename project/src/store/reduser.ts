@@ -1,9 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
 //import { movies } from '../components/mocks/mocks';
 import { MovieProps } from '../types/movie/movie';
-import { changeGenre, getUserInformation, loadMovies, requireAuthorization, setLoadingStatus } from './action';
+import { changeGenre, getPromoMovie, getReviews, getUserInformation, loadMovies, postReview, requireAuthorization, setLoadingStatus } from './action';
 import { AuthorizationStatus } from '../constants';
 import { UserData } from '../types/user/user';
+import { ReviewProps } from '../types/review/review';
 
 type InitialState = {
   genre: string;
@@ -11,6 +12,8 @@ type InitialState = {
   isLoading: boolean;
   authorizationStatus: string;
   userInformation: null | UserData;
+  review: ReviewProps[];
+  movie: MovieProps | null;
 };
 
 // Объект начального состояния жанр (используется для фильтров по жанру)
@@ -21,6 +24,8 @@ const defaultState: InitialState = {
   isLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   userInformation: null,
+  review: [],
+  movie: null
 };
 
 const reducer = createReducer(defaultState, (builder) => {
@@ -31,6 +36,9 @@ const reducer = createReducer(defaultState, (builder) => {
     .addCase(loadMovies, (state, action) => {
       state.movies = action.payload;
     })
+    .addCase(getPromoMovie, (state, action) => {
+      state.movie = action.payload;
+    })
     .addCase(setLoadingStatus, (state, action) => {
       state.isLoading = action.payload;
     })
@@ -39,6 +47,12 @@ const reducer = createReducer(defaultState, (builder) => {
     })
     .addCase(getUserInformation, (state, action) => {
       state.userInformation = action.payload;
+    })
+    .addCase(postReview, (state, action) => {
+      state.review = action.payload;
+    })
+    .addCase(getReviews, (state, action) => {
+      state.review = action.payload;
     });
 });
 

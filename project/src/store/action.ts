@@ -3,6 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { MovieProps } from '../types/movie/movie';
 import { UserData } from '../types/user/user';
 import { AppRoute } from '../constants';
+import { ReviewProps } from '../types/review/review';
 
 export const changeGenre = createAction('changeGenre',
   (genre: string) => ({
@@ -12,6 +13,11 @@ export const changeGenre = createAction('changeGenre',
 export const loadMovies = createAction('data/loadMovies',
   (movies: MovieProps[]) => ({
     payload: movies,
+  }));
+
+export const getPromoMovie = createAction('data/getPromoMovie',
+  (movie: MovieProps) => ({
+    payload: movie,
   }));
 
 export const setError = createAction('setError',
@@ -38,4 +44,12 @@ export const getUserInformation = createAction('user/userInformation',
 
 export const redirectToRoute = createAction('data/redirectToRoute',
   (redirect: AppRoute) => ({ payload: redirect })
+);
+
+export const postReview = createAction('data/postReview',
+  (review: ReviewProps[]) => ({ payload: review })
+);
+
+export const getReviews = createAction('data/getReviews',
+  (review: ReviewProps[]) => ({ payload: review })
 );
