@@ -1,10 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
-import { AppRoute } from '../../constants';
+import { AppRoute, Status } from '../../constants';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
+import { getStatus } from '../../store/user/selectors';
 
 type Props = {
   value: string;
@@ -20,7 +21,7 @@ type FormProps = {
 
 function SignIn(): JSX.Element {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const loginStatus = useAppSelector(getStatus);
   const [formValue, setFormValue] = useState<FormProps>({
     email: {
       value: '',
@@ -59,7 +60,6 @@ function SignIn(): JSX.Element {
       login: formValue.email.value,
       password: formValue.password.value
     });
-    navigate(AppRoute.Main);
   }
 
   return (
@@ -125,8 +125,10 @@ function SignIn(): JSX.Element {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit" disabled={!(formValue.email.isValid && formValue.password.isValid)}>
-              Sign in
+            <button className="sign-in__btn" type="submit"
+              disabled={!(formValue.email.isValid && formValue.password.isValid) || loginStatus === Status.Loading || loginStatus === Status.Failed}
+            >
+              {loginStatus === Status.Loading ? 'Loading..' : 'Sign in'}
             </button>
           </div>
         </form>

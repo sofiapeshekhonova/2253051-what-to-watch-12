@@ -7,7 +7,7 @@ export enum AppRoute {
   Review = '/films/:id/review',
   Player = '/player/:id',
   MyList = '/mylist',
-  NotFoundPage = '*'
+  NotFoundPage = '*',
 }
 
 export enum AuthorizationStatus {
@@ -58,4 +58,18 @@ export enum APIRoute {
   Logout = '/logout',
   Comment = '/comments',
   Promo = '/promo'
+}
+
+export enum NameSpace {
+  Film = 'FILM',
+  Movies = 'Movies',
+  User = 'USER',
+  App = 'APP'
+}
+
+export enum Status {
+  Idle = 'Idle',
+  Loading = 'Loading',
+  Success = 'Success',
+  Failed = 'Failed',
 }

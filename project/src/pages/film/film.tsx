@@ -2,39 +2,37 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { MovieProps } from '../../types/movie/movie';
 import MoreLikeThis from '../../components/more-like-films/more-like-films';
 import Overview from '../../components/overview/overview';
-import { AuthorizationStatus, LINKS } from '../../constants';
+import { AuthorizationStatus, LINKS, Status } from '../../constants';
 import FilmNav from './film-nav';
 import Reviews from '../../components/reviews/reviews';
 import Details from '../../components/details/details';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getMovieReview } from '../../store/api-actions';
+import { fetchActiveMovieAction, fetchSimilarMoviesAction, getMovieReview } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { getActiveMovie, getActiveMovieStatus } from '../../store/film/selectors';
 
-type Props = {
-  movies: MovieProps[];
-}
-
-function Film({ movies }: Props): JSX.Element {
+function Film(): JSX.Element {
   const dispatch = useAppDispatch();
   const movieId = Number(useParams().id);
-  const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const movieStatus = useAppSelector(getActiveMovieStatus);
+  const movie = useAppSelector(getActiveMovie);
   const [activeLink, setActiveLink] = useState('Overview');
 
   useEffect(()=> {
     dispatch(getMovieReview(movieId));
-  },[]);
+    dispatch(fetchActiveMovieAction(movieId));
+    dispatch(fetchSimilarMoviesAction(movieId));
+  },[movieId, dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getMovieReview(movieId));
-  // }, [dispatch, movieId]);
-
-  if (movie === undefined) {
-    return <p>Информация по фильму не найдена</p>;
+  if (movie === null || movieStatus === Status.Idle || movieStatus === Status.Loading) {
+    return (
+      <LoadingScreen />
+    );
   }
-
   const movieInformation = () => {
     switch (activeLink) {
       case 'Overview':
@@ -116,14 +114,13 @@ function Film({ movies }: Props): JSX.Element {
                 </ul>
               </nav>
               {movieInformation()}
-
             </div>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <MoreLikeThis genre={movie.genre} id={movie.id} movies={movies}/>
+        <MoreLikeThis />
         <Footer />
       </div>
     </>

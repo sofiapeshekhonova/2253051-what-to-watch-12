@@ -3,15 +3,19 @@ import FilmList from '../../components/films-list/films-list';
 import GenreList from '../../components/genres-list/genres-list';
 import Footer from '../../components/footer/footer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre } from '../../store/action';
 import ShowMore from '../../components/show-more/show-more';
 import { useState } from 'react';
+import { getMovies, getStatus } from '../../store/movies/selectors';
+import { getGenre } from '../../store/app/selectors';
+import { changeGenre } from '../../store/app/app';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function Main(): JSX.Element {
-  const [countCards, setCountCards] = useState(8);
-  const selectedGenre = useAppSelector((state) => state.genre);
   const dispatch = useAppDispatch();
-  let movies = useAppSelector((state) => state.movies);
+  const [countCards, setCountCards] = useState(8);
+  const selectedGenre = useAppSelector(getGenre);
+  const isLoading = useAppSelector(getStatus);
+  let movies = useAppSelector(getMovies);
   const sortMovies = movies.filter((movie) => movie.genre === selectedGenre);
   const genres = ['All genres', ...new Set(movies.map((movie) => movie.genre))];
 
@@ -19,7 +23,7 @@ function Main(): JSX.Element {
     dispatch(changeGenre(genre));
   };
 
-  if(selectedGenre !== 'All genres'){
+  if (selectedGenre !== 'All genres') {
     movies = sortMovies;
   }
 
@@ -29,18 +33,18 @@ function Main(): JSX.Element {
     }
   };
 
-
   return (
     <main >
-      <FilmCard />
+      {isLoading === 'Loading' ? <LoadingScreen /> : <FilmCard />}
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList handleChangeGenre={handleChangeGenre} genres={genres} />
-          <div className="catalog__films-list">
-            <FilmList movies={movies} countCards={countCards}/>
-          </div>
-          <ShowMore handleMoreFilmsShow={handleMoreFilmsShow} movies={movies} countCards={countCards}/>
+          {isLoading === 'Loading' ? <LoadingScreen /> :
+            <div className="catalog__films-list">
+              <FilmList movies={movies} countCards={countCards} />
+            </div>}
+          <ShowMore handleMoreFilmsShow={handleMoreFilmsShow} movies={movies} countCards={countCards} />
         </section>
         <Footer />
       </div>

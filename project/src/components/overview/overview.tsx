@@ -7,7 +7,6 @@ type Props = {
 
 function Overview({movie}: Props) {
   const movieRating = callRating(movie.rating);
-
   return (
     <>
       <div className="film-rating">

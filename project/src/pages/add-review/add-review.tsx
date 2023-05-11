@@ -1,21 +1,25 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { MovieProps } from '../../types/movie/movie';
 import StarsInput from '../../components/stars-input/stars-input';
-import { useState, FormEvent, ChangeEvent } from 'react';
-import { STARS } from '../../constants';
+import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
+import { STARS, Status } from '../../constants';
 import './add-review.css';
-import { useAppDispatch } from '../../hooks';
-import { postMovieReview } from '../../store/api-actions';
-type PropsPage = {
-  movies: MovieProps[];
-}
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchActiveMovieAction, postMovieReview } from '../../store/api-actions';
+import { getActiveMovie, getActiveMovieStatus, getReviewStatus } from '../../store/film/selectors';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-function AddReview({ movies }: PropsPage): JSX.Element {
-  const navigate = useNavigate();
+function AddReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const movieId = Number(useParams().id);
-  const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
+
+  useEffect(()=> {
+    dispatch(fetchActiveMovieAction(movieId));
+  },[movieId, dispatch]);
+
+  const postStatus = useAppSelector(getReviewStatus);
+  const movie = useAppSelector(getActiveMovie);
+  const movieStatus = useAppSelector(getActiveMovieStatus);
 
   const [formData, setFormData] = useState({
     rating: 0,
@@ -36,13 +40,12 @@ function AddReview({ movies }: PropsPage): JSX.Element {
       comment: '',
       movieId
     });
-    if (movie !== undefined) {
-      navigate(`/films/${movie.id}`);
-    }
   }
 
-  if (movie === undefined) {
-    return <p>Информация по фильму не найдена</p>;
+  if (movie === null || movieStatus === Status.Idle || movieStatus === Status.Loading) {
+    return (
+      <LoadingScreen />
+    );
   }
 
   return (
@@ -87,9 +90,9 @@ function AddReview({ movies }: PropsPage): JSX.Element {
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit"
                 disabled={(formData.comment.length <= 50 ||
-                  formData.rating === 0 || formData.comment.length >= 300
+                  formData.rating === 0 || formData.comment.length >= 400 || postStatus === Status.Loading || postStatus === Status.Failed
                 )}
-              >Post
+              >{postStatus === Status.Loading ? 'Loading' : 'Post'}
               </button>
             </div>
           </div>

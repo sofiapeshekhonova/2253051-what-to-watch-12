@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import Header from '../header/header';
 import './film-card.css';
 import { useAppSelector } from '../../hooks';
+import { getPromoMovie } from '../../store/movies/selectors';
 
 
 function FilmCard() {
-  const promoMovie = useAppSelector((state) => state.movie);
-
+  const promoMovie = useAppSelector(getPromoMovie);
   if(promoMovie === null) {
     return <p>Информация по фильму не найдена</p>;
   }

@@ -1,18 +1,26 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { MovieProps } from '../../types/movie/movie';
 import { useEffect, useRef, useState } from 'react';
 import formatTime from '../../untils/untils';
-type Props = {
-  movies: MovieProps[];
-}
+import { fetchActiveMovieAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getActiveMovie, getActiveMovieStatus } from '../../store/film/selectors';
+import { Status } from '../../constants';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-function Player({ movies }: Props): JSX.Element {
+function Player(): JSX.Element {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const ref = useRef<HTMLVideoElement>(null);
   const movieId = Number(useParams().id);
-  const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
   const [playMovie, setIsPlayMovie] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(()=> {
+    dispatch(fetchActiveMovieAction(movieId));
+  },[movieId, dispatch]);
+
+  const movie = useAppSelector(getActiveMovie);
+  const movieStatus = useAppSelector(getActiveMovieStatus);
 
   useEffect(() => {
     if (ref.current) {
@@ -21,8 +29,8 @@ function Player({ movies }: Props): JSX.Element {
     }
   }, []);
 
-  if (movie === undefined) {
-    return <p>Видео не найдено</p>;
+  if (movie === null || movieStatus === Status.Idle || movieStatus === Status.Loading) {
+    return <LoadingScreen />;
   }
 
   function handleExit() {
@@ -52,7 +60,7 @@ function Player({ movies }: Props): JSX.Element {
 
   return (
     <div className="player">
-      <video src={movie.videoLink} className="player__video" poster={movie.backgroundImage} ref={ref} onTimeUpdate={findTime}></video>
+      <video src={movie.videoLink} className="player__video" poster={movie.backgroundImage} ref={ref} onTimeUpdate={findTime} autoPlay></video>
       <button type="button" className="player__exit" onClick={handleExit}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
@@ -64,7 +72,7 @@ function Player({ movies }: Props): JSX.Element {
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={stopVideo}>
-            {playMovie ?
+            {!playMovie ?
               <>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>

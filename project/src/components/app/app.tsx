@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
@@ -9,26 +9,25 @@ import { AppRoute } from '../../constants';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import { getMovies} from '../../store/movies/selectors';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
-  const movies = useAppSelector((state) => state.movies);
-  const isLoading = useAppSelector((state) => state.isLoading);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const movies = useAppSelector(getMovies);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
           element={<Main />}
         />
         <Route path={AppRoute.Login} element={<SignIn />} />
-        <Route path={AppRoute.Player} element={<Player movies={movies} />} />
+        <Route path={AppRoute.Player} element={<Player />} />
         <Route path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
@@ -39,14 +38,14 @@ function App(): JSX.Element {
         <Route path={AppRoute.Review}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <AddReview movies={movies} />
+              <AddReview />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Film} element={<Film movies={movies} />} />
+        <Route path={AppRoute.Film} element={<Film />} />
         <Route path={AppRoute.NotFoundPage} element={<NotFoundScreen />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
