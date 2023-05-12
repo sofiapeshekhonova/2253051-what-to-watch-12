@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
 import Header from '../header/header';
-import './film-card.css';
+import './promo-film-card.css';
 import { useAppSelector } from '../../hooks';
 import { getPromoMovie } from '../../store/movies/selectors';
+import FilmButtons from '../film-buttons/fillm-buttons';
 
-
-function FilmCard() {
+function PromoFilmCard() {
   const promoMovie = useAppSelector(getPromoMovie);
   if(promoMovie === null) {
     return <p>Информация по фильму не найдена</p>;
@@ -30,24 +29,7 @@ function FilmCard() {
               <span className="film-card__genre">{promoMovie.genre}</span>
               <span className="film-card__year">{promoMovie.released}</span>
             </p>
-
-            <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
-                <Link to={`/player/${promoMovie.id}`} className="btn--play__link">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </Link>
-              </button>
-              <button className="btn btn--list film-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-                <span className="film-card__count">9</span>
-              </button>
-            </div>
+            <FilmButtons movie={promoMovie} />
           </div>
         </div>
       </div>
@@ -55,4 +37,4 @@ function FilmCard() {
   );
 }
 
-export default FilmCard;
+export default PromoFilmCard;

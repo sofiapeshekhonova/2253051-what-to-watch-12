@@ -7,7 +7,6 @@ import Movie from '../movie/Movie';
 function MoreLikeThis() {
   const movies = useAppSelector(getSimilarMovies);
   const moviesStatus = useAppSelector(getSimilarMovieStatus);
-
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>

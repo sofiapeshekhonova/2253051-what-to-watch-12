@@ -49,7 +49,7 @@ function AddReview(): JSX.Element {
   }
 
   return (
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full" style={{background: movie.backgroundColor}}>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={movie.backgroundImage} alt="The Grand Budapest Hotel" />
@@ -82,7 +82,7 @@ function AddReview(): JSX.Element {
             </div>
           </div>
 
-          <div className="add-review__text">
+          <div className="add-review__text" style={{background: 'rgb(255 255 255 / 26%)'}}>
             <textarea className="add-review__textarea" id="comment"
               name="comment" value={formData.comment}
               onChange={handleChange}

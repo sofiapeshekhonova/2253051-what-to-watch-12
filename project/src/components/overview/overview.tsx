@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { callRating } from '../../constants';
 import { MovieProps } from '../../types/movie/movie';
 
@@ -32,4 +33,4 @@ function Overview({movie}: Props) {
   );
 }
 
-export default Overview;
+export default memo(Overview);

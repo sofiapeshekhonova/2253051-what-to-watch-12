@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { getALLReview, getALLReviewStatus } from '../../store/film/selectors';
@@ -27,4 +28,4 @@ function Reviews() {
     </div>
   );
 }
-export default Reviews;
+export default memo(Reviews);

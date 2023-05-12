@@ -1,4 +1,3 @@
-//import { GENRES } from '../../constants';
 import GenreItem from '../genres-item/genres-item';
 
 type Props = {

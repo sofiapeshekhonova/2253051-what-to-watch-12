@@ -22,10 +22,7 @@ function App(): JSX.Element {
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<Main />}
-        />
+        <Route path={AppRoute.Main} element={<Main />} />
         <Route path={AppRoute.Login} element={<SignIn />} />
         <Route path={AppRoute.Player} element={<Player />} />
         <Route path={AppRoute.MyList}
