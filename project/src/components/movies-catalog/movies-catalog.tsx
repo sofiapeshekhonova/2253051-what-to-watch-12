@@ -16,9 +16,11 @@ function MoviesCatalog(): JSX.Element {
   let movies = useAppSelector(getMovies);
   const sortMovies = movies.filter((movie) => movie.genre === selectedGenre);
   const genres = ['All genres', ...new Set(movies.map((movie) => movie.genre))];
+  const [activeLink, setActiveLink] = useState('All genres');
 
   const handleChangeGenre = (genre: string) => {
     dispatch(changeGenre(genre));
+    setActiveLink(genre);
   };
 
   if (selectedGenre !== 'All genres') {
@@ -34,7 +36,7 @@ function MoviesCatalog(): JSX.Element {
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
-      <GenreList handleChangeGenre={handleChangeGenre} genres={genres} />
+      <GenreList handleChangeGenre={handleChangeGenre} genres={genres} activeLink={activeLink}/>
       {isLoading === 'Loading' ? <LoadingScreen /> :
         <div className="catalog__films-list">
           <FilmList movies={movies} countCards={countCards} />

@@ -4,7 +4,7 @@ import Overview from '../overview/overview';
 import Details from '../details/details';
 import Reviews from '../reviews/reviews';
 import { MovieProps } from '../../types/movie/movie';
-import FilmNav from '../../pages/film/film-nav';
+import FilmNav from '../film-nav/film-nav';
 
 type Props = {
   movie: MovieProps;
@@ -13,7 +13,7 @@ type Props = {
 function FilmInfo({ movie }: Props): JSX.Element {
   const [activeLink, setActiveLink] = useState('Overview');
 
-  const movieInformation = () => {
+  const movieInformation = () => {//мемо не влияет
     switch (activeLink) {
       case 'Overview':
         return <Overview movie={movie} />;
@@ -27,7 +27,6 @@ function FilmInfo({ movie }: Props): JSX.Element {
   };
 
   return (
-
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
@@ -38,8 +37,8 @@ function FilmInfo({ movie }: Props): JSX.Element {
       </nav>
       {movieInformation()}
     </div>
-
   );
 }
 
 export default FilmInfo;
+//мемо не влияет

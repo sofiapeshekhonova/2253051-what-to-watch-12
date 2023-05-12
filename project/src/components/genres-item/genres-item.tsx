@@ -1,21 +1,23 @@
 import { MouseEvent } from 'react';
+import { Link } from 'react-router-dom';
 
 type Props = {
   genre: string;
   handleChangeGenre: (genre: string) => void;
+  activeLink: string;
 }
-function GenreItem({ genre, handleChangeGenre }: Props) {
+function GenreItem({ genre, handleChangeGenre, activeLink }: Props) {
+  const className = `catalog__genres-item ${activeLink === genre ? 'catalog__genres-item--active' : ''}`;
   function handleClick(e: MouseEvent<HTMLElement>) {
     e.preventDefault();
     handleChangeGenre(genre);
   }
+
   return (
-    <li className="catalog__genres-item">
-      <a href="#" className="catalog__genres-link" onClick={handleClick}>{genre}</a>
+    <li className={className}>
+      <Link to='#' className="catalog__genres-link" onClick={handleClick}>{genre}</Link>
     </li>
   );
 }
 
 export default GenreItem;
-
-//catalog__genres-item--active - когда страница активная

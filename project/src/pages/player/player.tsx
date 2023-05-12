@@ -14,13 +14,13 @@ function Player(): JSX.Element {
   const movieId = Number(useParams().id);
   const [playMovie, setIsPlayMovie] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [timeLeftPr, setTimeLeftPr] = useState(0);
+  const movie = useAppSelector(getActiveMovie);
+  const movieStatus = useAppSelector(getActiveMovieStatus);
 
   useEffect(()=> {
     dispatch(fetchActiveMovieAction(movieId));
   },[movieId, dispatch]);
-
-  const movie = useAppSelector(getActiveMovie);
-  const movieStatus = useAppSelector(getActiveMovieStatus);
 
   useEffect(() => {
     if (ref.current) {
@@ -50,13 +50,13 @@ function Player(): JSX.Element {
   function findTime() {
     if(ref.current) {
       setTimeLeft(Math.floor(ref.current.duration - ref.current.currentTime));
+      setTimeLeftPr(ref.current.currentTime / ref.current.duration * 100);
     }
   }
 
   function handleFullScreenClick() {
     ref.current?.requestFullscreen();
   }
-
 
   return (
     <div className="player">
@@ -65,8 +65,8 @@ function Player(): JSX.Element {
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
+            <progress className="player__progress" value={timeLeftPr} max='100'></progress>
+            <div className="player__toggler" style={{ left: `${timeLeftPr}%`}}>Toggler</div>
           </div>
           <div className="player__time-value">{formatTime(timeLeft)}</div>
         </div>

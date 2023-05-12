@@ -31,3 +31,4 @@ function FilmButtons({movie, children}: Props) {
 }
 
 export default FilmButtons;
+//мемо не влияет

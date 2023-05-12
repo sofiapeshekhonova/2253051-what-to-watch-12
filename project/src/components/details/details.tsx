@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { MovieProps } from '../../types/movie/movie';
 
 type Props = {
@@ -40,4 +39,4 @@ function Details({movie}: Props) {
     </div>
   );
 }
-export default memo(Details);
+export default Details;

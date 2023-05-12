@@ -18,7 +18,6 @@ function App(): JSX.Element {
   const movies = useAppSelector(getMovies);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
