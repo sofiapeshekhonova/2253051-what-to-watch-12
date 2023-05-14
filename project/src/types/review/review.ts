@@ -7,4 +7,10 @@ export type ReviewProps = {
   rating: number;
   comment: string;
   date: string;
- }
+}
+
+export type CommentType = {
+  rating: number;
+  comment: string;
+  movieId: number;
+}

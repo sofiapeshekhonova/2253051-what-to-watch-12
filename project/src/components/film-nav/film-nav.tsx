@@ -1,4 +1,4 @@
-import { MouseEvent} from 'react';
+import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 type Props = {
   name: string;

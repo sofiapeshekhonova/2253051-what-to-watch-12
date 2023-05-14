@@ -1,14 +1,23 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
-//import { AuthorizationStatus } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAuthorizationStatus, getUserInformations } from '../../store/user/selectors';
+import { logoutAction } from '../../store/api-actions';
+import { memo } from 'react';
 
 type Props = {
   children?: JSX.Element;
 }
 
 function Header({ children }: Props) {
-  return (
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(getUserInformations);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  function handleClick() {
+    dispatch(logoutAction());
+  }
 
+  return (
     <header className="page-header user-page__head">
       <div className="logo">
         <Link to={AppRoute.Main} className="logo__link">
@@ -18,23 +27,23 @@ function Header({ children }: Props) {
         </Link>
       </div>
       {children}
-      {AuthorizationStatus.NoAuth ?
-        <div className="user-block">
-          <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>
-        </div>
-        :
+      {authorizationStatus === AuthorizationStatus.Auth ?
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              <img src={user?.avatarUrl} alt="User avatar" width="63" height="63" />
             </div>
           </li>
           <li className="user-block__item">
-            <Link to={AppRoute.Login} className="user-block__link">Sign out</Link>
+            <Link to={AppRoute.Login} className="user-block__link" onClick={handleClick}>Sign out</Link>
           </li>
-        </ul>}
+        </ul>
+        :
+        <div className="user-block">
+          <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>
+        </div>}
     </header>
   );
 }
 
-export default Header;
+export default memo(Header);

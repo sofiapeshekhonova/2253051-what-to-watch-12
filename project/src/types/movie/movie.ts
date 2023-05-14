@@ -16,4 +16,5 @@ export type MovieProps = {
   isFavorite: boolean;
   videoLink: string;
   previewVideoLink: string;
+  countCards?: number;
  }

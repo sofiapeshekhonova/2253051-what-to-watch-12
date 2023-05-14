@@ -1,15 +1,4 @@
-export const GENRES: string[] = [
-  'All genres',
-  'Comedies',
-  'Crime',
-  'Documentary',
-  'Dramas',
-  'Horror',
-  'Kids & Family',
-  'Romance',
-  'Sci-Fi',
-  'Thrillers'
-];
+export const GENRES = ['All genres'];
 
 export enum AppRoute {
   Login = '/login',
@@ -18,7 +7,7 @@ export enum AppRoute {
   Review = '/films/:id/review',
   Player = '/player/:id',
   MyList = '/mylist',
-  NotFoundPage = '*'
+  NotFoundPage = '*',
 }
 
 export enum AuthorizationStatus {
@@ -62,3 +51,25 @@ export const LINKS = [
   { id: 2, name: 'Details' },
   { id: 3, name: 'Reviews' },
 ];
+
+export enum APIRoute {
+  Movies = '/films',
+  Login = '/login',
+  Logout = '/logout',
+  Comment = '/comments',
+  Promo = '/promo'
+}
+
+export enum NameSpace {
+  Film = 'FILM',
+  Movies = 'Movies',
+  User = 'USER',
+  App = 'APP'
+}
+
+export enum Status {
+  Idle = 'Idle',
+  Loading = 'Loading',
+  Success = 'Success',
+  Failed = 'Failed',
+}

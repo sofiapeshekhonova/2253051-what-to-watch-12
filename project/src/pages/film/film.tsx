@@ -1,116 +1,46 @@
-import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import FilmCard from '../../components/film-card/film-card';
+import { getActiveMovie, getActiveMovieStatus, getSimilarMovieStatus, getSimilarMovies } from '../../store/film/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
-import { MovieProps } from '../../types/movie/movie';
-import MoreLikeThis from '../../components/more-like-films/more-like-films';
-import Overview from '../../components/overview/overview';
-import { LINKS } from '../../constants';
-import FilmNav from './film-nav';
-import Reviews from '../../components/reviews/reviews';
-import Details from '../../components/details/details';
+import SortMoviesList from '../../components/sort-movies-list/sort-movies-list';
+import { useParams } from 'react-router-dom';
+import { fetchActiveMovieAction, fetchSimilarMoviesAction, getMovieReview } from '../../store/api-actions';
+import { useEffect } from 'react';
+import { Status } from '../../constants';
 
-type Props = {
-  movies: MovieProps[];
-}
+function Film(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const movies = useAppSelector(getSimilarMovies);
+  const moviesStatus = useAppSelector(getSimilarMovieStatus);
+  const activeMovie = useAppSelector(getActiveMovie);
+  const sortMovies = movies.filter((movie) => movie.id !== activeMovie?.id).slice(0, 4);
 
-function Film({ movies }: Props): JSX.Element {
   const movieId = Number(useParams().id);
-  const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
-  const [activeLink, setActiveLink] = useState('Overview');
 
-  if (movie === undefined) {
-    return <p>Информация по фильму не найдена</p>;
+  useEffect(() => {
+    dispatch(getMovieReview(movieId));
+    dispatch(fetchActiveMovieAction(movieId));
+    dispatch(fetchSimilarMoviesAction(movieId));
+  }, [movieId, dispatch]);
+
+  const movieStatus = useAppSelector(getActiveMovieStatus);
+  const movie = useAppSelector(getActiveMovie);
+
+  if (movie === null || movieStatus === Status.Idle || movieStatus === Status.Loading) {
+    return (
+      <LoadingScreen />
+    );
   }
-
-  const movieInformation = () => {
-    switch (activeLink) {
-      case 'Overview':
-        return <Overview movie={movie} />;
-      case 'Details':
-        return <Details movie={movie} />;
-      case 'Reviews':
-        return <Reviews />;
-      default:
-        return <Overview movie={movie} />;
-    }
-  };
 
   return (
     <>
-      <section className="film-card film-card--full">
-        <div className="film-card__hero">
-          <div className="film-card__bg">
-            <img
-              src={movie.backgroundImage}
-              alt={movie.name}
-            />
-          </div>
-          <h1 className="visually-hidden">WTW</h1>
-          <Header />
-          <div className="film-card__wrap">
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{movie.name}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{movie.genre}</span>
-                <span className="film-card__year">{movie.released}</span>
-              </p>
-
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <Link to={`/player/${movie.id}`} className='btn--play__link'>
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"></use>
-                    </svg>
-                    <span>Play</span>
-                  </Link>
-                </button>
-                <button
-                  className="btn btn--list film-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-                <Link to={`/films/${movie.id}/review`} className="btn film-card__button">
-                  Add review
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="film-card__wrap film-card__translate-top">
-          <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img
-                src={movie.posterImage}
-                alt={movie.name}
-                width="218"
-                height="327"
-              />
-            </div>
-
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  {LINKS.map((li) => (
-                    <FilmNav key={li.id} name={li.name} setActiveLink={setActiveLink} activeLink={activeLink} />
-                  ))}
-                </ul>
-              </nav>
-              {movieInformation()}
-
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <FilmCard movie={movie}/>
       <div className="page-content">
-        <MoreLikeThis genre={movie.genre} id={movie.id}/>
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
+          {moviesStatus === 'Loading' ? <LoadingScreen /> : <SortMoviesList sortMovies={sortMovies} />}
+        </section>
         <Footer />
       </div>
     </>

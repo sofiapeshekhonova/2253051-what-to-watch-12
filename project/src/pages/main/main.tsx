@@ -1,29 +1,20 @@
-import FilmCard from '../../components/film-card/film-card';
-import { MovieProps } from '../../types/movie/movie';
-import FilmList from '../../components/films-list/films-list';
-import GenreList from '../../components/genres-list/genres-list';
+import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
 import Footer from '../../components/footer/footer';
+import { useAppSelector } from '../../hooks';
 
-type Props = {
-  movies: MovieProps[];
-  promoMovie: MovieProps;
-}
+import { getStatus } from '../../store/movies/selectors';
 
-function Main({ movies, promoMovie }: Props): JSX.Element {
+import LoadingScreen from '../loading-screen/loading-screen';
+import MoviesCatalog from '../../components/movies-catalog/movies-catalog';
+
+function Main(): JSX.Element {
+  const isLoading = useAppSelector(getStatus);
+
   return (
     <main >
-      <FilmCard promoMovie={promoMovie} />
+      {isLoading === 'Loading' ? <LoadingScreen /> : <PromoFilmCard />}
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList />
-          <div className="catalog__films-list">
-            <FilmList movies={movies} />
-          </div>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
-        </section>
+        <MoviesCatalog />
         <Footer />
       </div>
     </main>

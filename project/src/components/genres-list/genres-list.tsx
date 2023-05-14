@@ -1,11 +1,16 @@
-import { GENRES } from '../../constants';
 import GenreItem from '../genres-item/genres-item';
 
-function GenreList() {
+type Props = {
+  handleChangeGenre: (genre: string) => void;
+  genres: string[];
+  activeLink: string;
+}
+
+function GenreList({handleChangeGenre, genres, activeLink}: Props) {
   return (
     <ul className="catalog__genres-list">
-      {GENRES.map((genre) => (
-        <GenreItem genre={genre} key={genre}/>
+      {genres.map((genre) => (
+        <GenreItem genre={genre} key={genre} handleChangeGenre={handleChangeGenre} activeLink={activeLink}/>
       ))}
     </ul>
   );

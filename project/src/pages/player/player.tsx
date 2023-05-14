@@ -1,18 +1,26 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { MovieProps } from '../../types/movie/movie';
 import { useEffect, useRef, useState } from 'react';
 import formatTime from '../../untils/untils';
-type Props = {
-  movies: MovieProps[];
-}
+import { fetchActiveMovieAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getActiveMovie, getActiveMovieStatus } from '../../store/film/selectors';
+import { Status } from '../../constants';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-function Player({ movies }: Props): JSX.Element {
+function Player(): JSX.Element {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const ref = useRef<HTMLVideoElement>(null);
   const movieId = Number(useParams().id);
-  const movie: MovieProps | undefined = movies.find((element) => element.id === movieId);
   const [playMovie, setIsPlayMovie] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [timeLeftPr, setTimeLeftPr] = useState(0);
+  const movie = useAppSelector(getActiveMovie);
+  const movieStatus = useAppSelector(getActiveMovieStatus);
+
+  useEffect(()=> {
+    dispatch(fetchActiveMovieAction(movieId));
+  },[movieId, dispatch]);
 
   useEffect(() => {
     if (ref.current) {
@@ -21,8 +29,8 @@ function Player({ movies }: Props): JSX.Element {
     }
   }, []);
 
-  if (movie === undefined) {
-    return <p>Видео не найдено</p>;
+  if (movie === null || movieStatus === Status.Idle || movieStatus === Status.Loading) {
+    return <LoadingScreen />;
   }
 
   function handleExit() {
@@ -38,28 +46,33 @@ function Player({ movies }: Props): JSX.Element {
       setIsPlayMovie(true);
     }
   }
+
   function findTime() {
     if(ref.current) {
       setTimeLeft(Math.floor(ref.current.duration - ref.current.currentTime));
+      setTimeLeftPr(ref.current.currentTime / ref.current.duration * 100);
     }
   }
 
+  function handleFullScreenClick() {
+    ref.current?.requestFullscreen();
+  }
 
   return (
     <div className="player">
-      <video src={movie.videoLink} className="player__video" poster={movie.backgroundImage} ref={ref} onTimeUpdate={findTime}></video>
+      <video src={movie.videoLink} className="player__video" poster={movie.backgroundImage} ref={ref} onTimeUpdate={findTime} autoPlay></video>
       <button type="button" className="player__exit" onClick={handleExit}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
+            <progress className="player__progress" value={timeLeftPr} max='100'></progress>
+            <div className="player__toggler" style={{ left: `${timeLeftPr}%`}}>Toggler</div>
           </div>
           <div className="player__time-value">{formatTime(timeLeft)}</div>
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={stopVideo}>
-            {playMovie ?
+            {!playMovie ?
               <>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
@@ -75,7 +88,7 @@ function Player({ movies }: Props): JSX.Element {
           </button>
 
           <div className="player__name">Transpotting</div>
-          <button type="button" className="player__full-screen">
+          <button type="button" className="player__full-screen" onClick={handleFullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>
