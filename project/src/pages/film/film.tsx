@@ -1,5 +1,5 @@
 import FilmCard from '../../components/film-card/film-card';
-import { getActiveMovie, getActiveMovieStatus, getSimilarMovieStatus, getSimilarMovies } from '../../store/film/selectors';
+import { getActiveMovie, getActiveMovieStatus } from '../../store/film/selectors';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Footer from '../../components/footer/footer';
@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { fetchActiveMovieAction, fetchSimilarMoviesAction, getMovieReview } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { Status } from '../../constants';
+import { getSimilarMovieStatus, getSimilarMovies } from '../../store/movies/selectors';
 
 function Film(): JSX.Element {
   const dispatch = useAppDispatch();

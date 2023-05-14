@@ -5,15 +5,17 @@ import Details from '../details/details';
 import Reviews from '../reviews/reviews';
 import { MovieProps } from '../../types/movie/movie';
 import FilmNav from '../film-nav/film-nav';
+import { useParams } from 'react-router-dom';
 
 type Props = {
   movie: MovieProps;
 }
 
 function FilmInfo({ movie }: Props): JSX.Element {
-  const [activeLink, setActiveLink] = useState('Overview');
+  const params = useParams();
+  const [activeLink, setActiveLink] = useState(params.info || 'Overview');
 
-  const movieInformation = () => {//мемо не влияет
+  const movieInformation = () => {
     switch (activeLink) {
       case 'Overview':
         return <Overview movie={movie} />;
@@ -41,4 +43,3 @@ function FilmInfo({ movie }: Props): JSX.Element {
 }
 
 export default FilmInfo;
-//мемо не влияет

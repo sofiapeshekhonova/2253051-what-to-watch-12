@@ -9,13 +9,11 @@ import { AppRoute } from '../../constants';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';
-import { getMovies} from '../../store/movies/selectors';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
-  const movies = useAppSelector(getMovies);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
@@ -27,7 +25,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <MyList movies={movies} />
+              <MyList />
             </PrivateRoute>
           }
         />
@@ -38,7 +36,9 @@ function App(): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Film} element={<Film />} />
+        <Route path={AppRoute.Film} element={<Film />}>
+          <Route path={AppRoute.Info} element={<Film />} />
+        </Route>
         <Route path={AppRoute.NotFoundPage} element={<NotFoundScreen />} />
       </Routes>
     </HistoryRouter>

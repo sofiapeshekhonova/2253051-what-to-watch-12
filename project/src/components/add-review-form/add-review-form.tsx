@@ -61,6 +61,7 @@ function AddReviewForm(): JSX.Element {
         {(formData.comment && formData.comment.length < 51) && <b> Сharacters left: {51 - formData.comment.length}</b>}
         {(formData.comment && formData.comment.length >= 400) && <b > Max 400 Сharacters</b>}
       </p>
+      {postStatus === Status.Failed && <p>Something gooing wrong...</p>}
     </form>
   );
 }

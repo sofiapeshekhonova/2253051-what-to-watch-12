@@ -6,7 +6,7 @@ type Props = {
   activeLink: string;
 }
 
-function FilmNav({ name, setActiveLink, activeLink }: Props) {
+function FilmNav({ name, setActiveLink, activeLink}: Props) {
 
   function handeleClick(event: MouseEvent<HTMLElement>) {
     event.preventDefault();
@@ -18,7 +18,7 @@ function FilmNav({ name, setActiveLink, activeLink }: Props) {
 
   return (
     <li className={className} onClick={handeleClick}>
-      <Link to="#" className="film-nav__link">{name}</Link>
+      <Link to={name} className="film-nav__link">{name}</Link>
     </li>
   );
 }

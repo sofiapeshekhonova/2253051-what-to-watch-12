@@ -1,11 +1,15 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { MovieProps } from '../../types/movie/movie';
 import FilmList from '../../components/films-list/films-list';
-type Props = {
-  movies: MovieProps[];
-}
-function MyList({movies}: Props): JSX.Element {
+import { getFavoritesMovies, getFavoritesMoviesStatus } from '../../store/movies/selectors';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { Status } from '../../constants';
+
+function MyList(): JSX.Element {
+  const movies = useAppSelector(getFavoritesMovies);
+  const moviesStatus = useAppSelector(getFavoritesMoviesStatus);
+
   return (
     <div className="user-page">
       <Header>
@@ -15,7 +19,7 @@ function MyList({movies}: Props): JSX.Element {
       </Header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmList movies={movies}/>
+        {moviesStatus === Status.Loading ? <LoadingScreen /> : <FilmList movies={movies}/>}
       </section>
       < Footer />
     </div>

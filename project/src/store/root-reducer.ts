@@ -9,5 +9,5 @@ export const rootReducer = combineReducers({
   [NameSpace.Movies]: moviesProcess.reducer,
   [NameSpace.App]: appProcess.reducer,
   [NameSpace.User]: userProcess.reducer,
-  [NameSpace.Film]: filmProcess.reducer
+  [NameSpace.Film]: filmProcess.reducer,
 });

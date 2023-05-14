@@ -1,8 +1,8 @@
 import Header from '../header/header';
 import './promo-film-card.css';
 import { useAppSelector } from '../../hooks';
-import { getPromoMovie } from '../../store/movies/selectors';
 import FilmButtons from '../film-buttons/fillm-buttons';
+import { getPromoMovie } from '../../store/film/selectors';
 
 function PromoFilmCard() {
   const promoMovie = useAppSelector(getPromoMovie);

@@ -17,4 +17,9 @@ export type MovieProps = {
   videoLink: string;
   previewVideoLink: string;
   countCards?: number;
- }
+}
+
+export type FavoritesMovies = {
+  movieId: number;
+  status: number;
+}
