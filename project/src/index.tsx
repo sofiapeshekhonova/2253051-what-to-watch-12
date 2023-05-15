@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import App from './components/app/app';
 import { store } from './store';
 import { checkAuthAction, fetchFavoritesMoviesAction, fetchMoviesAction, fetchPromoMovieAction } from './store/api-actions';
 import 'react-toastify/dist/ReactToastify.css';

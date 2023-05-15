@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { LINKS } from '../../constants';
 import Overview from '../overview/overview';
 import Details from '../details/details';
 import Reviews from '../reviews/reviews';
 import { MovieProps } from '../../types/movie/movie';
 import FilmNav from '../film-nav/film-nav';
-import { useParams } from 'react-router-dom';
 
 type Props = {
   movie: MovieProps;

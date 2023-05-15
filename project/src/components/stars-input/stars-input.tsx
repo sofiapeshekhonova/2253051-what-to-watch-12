@@ -6,10 +6,9 @@ type StarsInputProps = {
 }
 
 function StarsInput({ onChange, starId, name, value }: StarsInputProps): JSX.Element {
-
   return (
     <>
-      <input className="rating__input" id={`star-${starId}`} type="radio" name="rating" value={starId} onChange={onChange} checked={starId === Number(value)}/>
+      <input className="rating__input" id={`star-${starId}`} type="radio" name="rating" value={starId} onChange={onChange} checked={starId === Number(value)} />
       <label className="rating__label" htmlFor={`star-${starId}`}>{name}</label>
     </>
   );

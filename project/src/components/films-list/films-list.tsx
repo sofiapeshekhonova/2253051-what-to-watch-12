@@ -6,7 +6,7 @@ type Props = {
   countCards?: number;
 }
 
-function FilmList({movies, countCards}: Props): JSX.Element {
+function FilmList({ movies, countCards }: Props): JSX.Element {
   return (
     <div className="catalog__films-list">
       {movies.slice(0, countCards).map((movie) => (

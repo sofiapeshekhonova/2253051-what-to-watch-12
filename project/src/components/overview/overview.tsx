@@ -5,7 +5,7 @@ type Props = {
   movie: MovieProps;
 }
 
-function Overview({movie}: Props) {
+function Overview({ movie }: Props) {
   const movieRating = callRating(movie.rating);
   return (
     <>

@@ -1,14 +1,14 @@
-import FilmCard from '../../components/film-card/film-card';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getActiveMovie, getActiveMovieStatus } from '../../store/film/selectors';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import LoadingScreen from '../loading-screen/loading-screen';
+import { fetchActiveMovieAction, fetchSimilarMoviesAction, getMovieReview } from '../../store/api-actions';
+import { getSimilarMovieStatus, getSimilarMovies } from '../../store/movies/selectors';
+import FilmCard from '../../components/film-card/film-card';
 import Footer from '../../components/footer/footer';
 import SortMoviesList from '../../components/sort-movies-list/sort-movies-list';
-import { useParams } from 'react-router-dom';
-import { fetchActiveMovieAction, fetchSimilarMoviesAction, getMovieReview } from '../../store/api-actions';
-import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 import { Status } from '../../constants';
-import { getSimilarMovieStatus, getSimilarMovies } from '../../store/movies/selectors';
 
 function Film(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -36,7 +36,7 @@ function Film(): JSX.Element {
 
   return (
     <>
-      <FilmCard movie={movie}/>
+      <FilmCard movie={movie} />
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>

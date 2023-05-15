@@ -7,7 +7,7 @@ type Props = {
   movie: MovieProps;
 }
 
-function Movie({movie}: Props): JSX.Element {
+function Movie({ movie }: Props): JSX.Element {
   const { id } = movie;
   const movieId = `/films/${id}`;
   const [activeVideo, setActiveVideo] = useState(false);
@@ -25,8 +25,8 @@ function Movie({movie}: Props): JSX.Element {
     }
   }
 
-  useEffect(()=> {
-    if(activeMovieCard) {
+  useEffect(() => {
+    if (activeMovieCard) {
       const timer = setTimeout(() => {
         setActiveVideo(true);
       }, 1000);
@@ -42,8 +42,8 @@ function Movie({movie}: Props): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card" onMouseOver={mouseOverHandler} onMouseLeave={mouseLeaveHandler}>
       {!activeVideo ?
-        <MovieImage movie={movie} movieId={movieId}/> :
-        <VideoCard movie={movie} movieId={movieId}/>}
+        <MovieImage movie={movie} movieId={movieId} /> :
+        <VideoCard movie={movie} movieId={movieId} />}
     </article>
   );
 }

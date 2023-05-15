@@ -1,9 +1,9 @@
 import { Link, Navigate } from 'react-router-dom';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { useAppSelector } from '../../hooks';
+import SignInForm from '../../components/sign-in-form/sign-in-form';
 import Footer from '../../components/footer/footer';
 import { AppRoute, AuthorizationStatus } from '../../constants';
-import SignInForm from '../../components/sign-in-form/sign-in-form';
-import { useAppSelector } from '../../hooks';
-import { getAuthorizationStatus } from '../../store/user/selectors';
 
 function SignIn(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);

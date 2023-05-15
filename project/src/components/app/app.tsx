@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
@@ -8,8 +10,6 @@ import SignIn from '../../pages/sign-in/sign-in';
 import { AppRoute } from '../../constants';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { useAppSelector } from '../../hooks';
-import { getAuthorizationStatus } from '../../store/user/selectors';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 

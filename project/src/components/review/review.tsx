@@ -5,7 +5,7 @@ type Props = {
   review: ReviewProps;
 }
 
-function Review({review}: Props) {
+function Review({ review }: Props) {
   const date = new Date(review.date);
   const month = date.toLocaleString('en-EN', { month: 'long' });
   const year = date.getFullYear();

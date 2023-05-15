@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import formatTime from '../../untils/untils';
 import { fetchActiveMovieAction } from '../../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getActiveMovie, getActiveMovieStatus } from '../../store/film/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import formatTime from '../../untils/untils';
 import { Status } from '../../constants';
 import LoadingScreen from '../loading-screen/loading-screen';
 
@@ -18,9 +18,9 @@ function Player(): JSX.Element {
   const movie = useAppSelector(getActiveMovie);
   const movieStatus = useAppSelector(getActiveMovieStatus);
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(fetchActiveMovieAction(movieId));
-  },[movieId, dispatch]);
+  }, [movieId, dispatch]);
 
   useEffect(() => {
     if (ref.current) {
@@ -48,7 +48,7 @@ function Player(): JSX.Element {
   }
 
   function findTime() {
-    if(ref.current) {
+    if (ref.current) {
       setTimeLeft(Math.floor(ref.current.duration - ref.current.currentTime));
       setTimeLeftPr(ref.current.currentTime / ref.current.duration * 100);
     }
@@ -66,7 +66,7 @@ function Player(): JSX.Element {
         <div className="player__controls-row">
           <div className="player__time">
             <progress className="player__progress" value={timeLeftPr} max='100'></progress>
-            <div className="player__toggler" style={{ left: `${timeLeftPr}%`}}>Toggler</div>
+            <div className="player__toggler" style={{ left: `${timeLeftPr}%` }}>Toggler</div>
           </div>
           <div className="player__time-value">{formatTime(timeLeft)}</div>
         </div>

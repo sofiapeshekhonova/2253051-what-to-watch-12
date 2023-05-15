@@ -6,6 +6,7 @@ type Props = {
   handleChangeGenre: (genre: string) => void;
   activeLink: string;
 }
+
 function GenreItem({ genre, handleChangeGenre, activeLink }: Props) {
   const className = `catalog__genres-item ${activeLink === genre ? 'catalog__genres-item--active' : ''}`;
   function handleClick(e: MouseEvent<HTMLElement>) {

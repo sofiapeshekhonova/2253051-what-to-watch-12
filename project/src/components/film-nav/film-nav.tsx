@@ -1,5 +1,6 @@
 import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
+
 type Props = {
   name: string;
   setActiveLink: (tab: string) => void;
@@ -7,17 +8,15 @@ type Props = {
 }
 
 function FilmNav({ name, setActiveLink, activeLink}: Props) {
-
-  function handeleClick(event: MouseEvent<HTMLElement>) {
+  function handleClick(event: MouseEvent<HTMLElement>) {
     event.preventDefault();
     setActiveLink(name);
   }
 
-  let className = '';
-  activeLink === name ? className = 'film-nav__item film-nav__item--active' : className = 'film-nav__item';
+  const className = `film-nav__item ${activeLink === name ? 'film-nav__item--active' : ''}`;
 
   return (
-    <li className={className} onClick={handeleClick}>
+    <li className={className} onClick={handleClick}>
       <Link to={name} className="film-nav__link">{name}</Link>
     </li>
   );

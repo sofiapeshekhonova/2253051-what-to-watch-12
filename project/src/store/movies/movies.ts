@@ -3,10 +3,8 @@ import { NameSpace, Status } from '../../constants';
 import { fetchFavoritesMoviesAction, fetchMoviesAction, fetchSimilarMoviesAction } from '../api-actions';
 import { MovieProps } from '../../types/movie/movie';
 
-
 type InitialState = {
   movies: MovieProps[];
-  movie: MovieProps | null;
   status: Status;
   statusFavorites: Status;
   favoritesMovies: MovieProps[];
@@ -16,14 +14,12 @@ type InitialState = {
 
 const initialState: InitialState = {
   movies: [],
-  movie: null,
   status: Status.Idle,
   statusFavorites: Status.Idle,
   favoritesMovies: [],
   statusSimilarMovies: Status.Idle,
   similarMovies: [],
 };
-
 
 export const moviesProcess = createSlice({
   name: NameSpace.Movies,
@@ -63,4 +59,3 @@ export const moviesProcess = createSlice({
       });
   }
 });
-

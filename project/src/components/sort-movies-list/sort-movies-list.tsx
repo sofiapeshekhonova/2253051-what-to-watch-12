@@ -5,7 +5,7 @@ type Props = {
   sortMovies: MovieProps[];
 }
 
-function SortMoviesList({sortMovies}: Props): JSX.Element {
+function SortMoviesList({ sortMovies }: Props): JSX.Element {
   return (
     <div className="catalog__films-list">
       {sortMovies.map((movie) => (

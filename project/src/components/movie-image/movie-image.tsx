@@ -10,7 +10,7 @@ function handleClick() {
   window.scrollTo(0, 0);
 }
 
-function MovieImage({movie, movieId}: Props) {
+function MovieImage({ movie, movieId }: Props) {
   return (
     <>
       <div className="small-film-card__image">

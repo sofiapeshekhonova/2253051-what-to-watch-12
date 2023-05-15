@@ -9,7 +9,6 @@ const initialState: InitialState = {
   genre: 'All genres',
 };
 
-
 export const appProcess = createSlice({
   name: NameSpace.App,
   initialState,

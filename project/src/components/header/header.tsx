@@ -1,9 +1,9 @@
+import { memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus, getUserInformations } from '../../store/user/selectors';
 import { logoutAction } from '../../store/api-actions';
-import { memo } from 'react';
 
 type Props = {
   children?: JSX.Element;
@@ -14,9 +14,11 @@ function Header({ children }: Props) {
   const navigate = useNavigate();
   const user = useAppSelector(getUserInformations);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
   function handleClick() {
     dispatch(logoutAction());
   }
+
   function handleListClick() {
     navigate(AppRoute.MyList);
   }

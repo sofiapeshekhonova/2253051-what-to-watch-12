@@ -8,7 +8,7 @@ type Props = {
   countCards: number;
 }
 
-function ShowMore({handleMoreFilmsShow, movies, countCards}: Props) {
+function ShowMore({ handleMoreFilmsShow, movies, countCards }: Props) {
 
   function handleClick(e: MouseEvent) {
     e.preventDefault();

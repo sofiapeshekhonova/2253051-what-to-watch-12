@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
-import StarsInput from '../../components/stars-input/stars-input';
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { STARS, Status } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postMovieReview } from '../../store/api-actions';
 import { getReviewStatus } from '../../store/film/selectors';
+import StarsInput from '../../components/stars-input/stars-input';
+import { STARS, Status } from '../../constants';
 
 function AddReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();

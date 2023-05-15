@@ -25,7 +25,7 @@ function FilmButtons({ movie, children }: Props) {
   };
 
   function handleClick() {
-    if(authorizationStatus === AuthorizationStatus.Auth) {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(postFavoriteMoviesAction(data));
     } else {
       navigate(AppRoute.Login);

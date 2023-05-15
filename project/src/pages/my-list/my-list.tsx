@@ -1,9 +1,9 @@
+import { getFavoritesMovies, getFavoritesMoviesStatus } from '../../store/movies/selectors';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import FilmList from '../../components/films-list/films-list';
-import { getFavoritesMovies, getFavoritesMoviesStatus } from '../../store/movies/selectors';
-import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { useAppSelector } from '../../hooks';
 import { Status } from '../../constants';
 
 function MyList(): JSX.Element {
@@ -19,7 +19,7 @@ function MyList(): JSX.Element {
       </Header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        {moviesStatus === Status.Loading ? <LoadingScreen /> : <FilmList movies={movies}/>}
+        {moviesStatus === Status.Loading ? <LoadingScreen /> : <FilmList movies={movies} />}
       </section>
       < Footer />
     </div>
