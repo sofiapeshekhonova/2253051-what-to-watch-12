@@ -1,9 +1,9 @@
-import { Status } from '../../constants';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import { getStatus } from '../../store/user/selectors';
+import { Status } from '../../constants';
+import { AuthData } from '../../types/auth-data';
 
 type Props = {
   value: string;

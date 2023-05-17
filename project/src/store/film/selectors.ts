@@ -7,11 +7,8 @@ export const getALLReview = (state: State): ReviewProps[] => state[NameSpace.Fil
 export const getALLReviewStatus = (state: State): string => state[NameSpace.Film].statusReviews;
 
 export const getReviewStatus = (state: State): string => state[NameSpace.Film].status;
-export const postReview = (state: State): ReviewProps[] => state[NameSpace.Film].comment;
 
 export const getActiveMovie = (state: State): MovieProps | null => state[NameSpace.Film].activeFilm;
 export const getActiveMovieStatus = (state: State): string => state[NameSpace.Film].statusFilm;
 
-export const getSimilarMovies = (state: State): MovieProps[] => state[NameSpace.Film].similarMovies;
-export const getSimilarMovieStatus = (state: State): string => state[NameSpace.Film].statusSimilarMovies;
-
+export const getPromoMovie = (state: State): MovieProps | null => state[NameSpace.Film].movie;

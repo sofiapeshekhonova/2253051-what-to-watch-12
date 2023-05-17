@@ -1,11 +1,11 @@
-import FilmList from '../films-list/films-list';
-import GenreList from '../genres-list/genres-list';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import ShowMore from '../show-more/show-more';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getMovies, getStatus } from '../../store/movies/selectors';
 import { getGenre } from '../../store/app/selectors';
 import { changeGenre } from '../../store/app/app';
+import FilmList from '../films-list/films-list';
+import GenreList from '../genres-list/genres-list';
+import ShowMore from '../show-more/show-more';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 function MoviesCatalog(): JSX.Element {
@@ -36,7 +36,7 @@ function MoviesCatalog(): JSX.Element {
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
-      <GenreList handleChangeGenre={handleChangeGenre} genres={genres} activeLink={activeLink}/>
+      <GenreList handleChangeGenre={handleChangeGenre} genres={genres} activeLink={activeLink} />
       {isLoading === 'Loading' ? <LoadingScreen /> :
         <div className="catalog__films-list">
           <FilmList movies={movies} countCards={countCards} />

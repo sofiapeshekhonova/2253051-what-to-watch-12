@@ -4,7 +4,7 @@ type Props = {
   movie: MovieProps;
 }
 
-function Details({movie}: Props) {
+function Details({ movie }: Props) {
   const starring = movie.starring.join(', ');
   const hours = Math.trunc(movie.runTime / 60);
   const minutes = Math.trunc(movie.runTime - hours * 60);

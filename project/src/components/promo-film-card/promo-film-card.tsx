@@ -1,12 +1,12 @@
-import Header from '../header/header';
-import './promo-film-card.css';
 import { useAppSelector } from '../../hooks';
-import { getPromoMovie } from '../../store/movies/selectors';
+import { getPromoMovie } from '../../store/film/selectors';
+import Header from '../header/header';
 import FilmButtons from '../film-buttons/fillm-buttons';
+import './promo-film-card.css';
 
 function PromoFilmCard() {
   const promoMovie = useAppSelector(getPromoMovie);
-  if(promoMovie === null) {
+  if (promoMovie === null) {
     return <p>Информация по фильму не найдена</p>;
   }
 

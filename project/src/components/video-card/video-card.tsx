@@ -1,13 +1,13 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MovieProps } from '../../types/movie/movie';
-import { useEffect, useRef } from 'react';
 
 type Props = {
   movie: MovieProps;
   movieId: string;
 }
 
-function VideoCard({movie, movieId}: Props) {
+function VideoCard({ movie, movieId }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

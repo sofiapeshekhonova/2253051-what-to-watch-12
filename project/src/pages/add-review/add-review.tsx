@@ -1,21 +1,21 @@
 import { Link, useParams } from 'react-router-dom';
-import Header from '../../components/header/header';
 import { useEffect } from 'react';
-import { Status } from '../../constants';
-import './add-review.css';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchActiveMovieAction } from '../../store/api-actions';
 import { getActiveMovie, getActiveMovieStatus } from '../../store/film/selectors';
-import LoadingScreen from '../loading-screen/loading-screen';
+import Header from '../../components/header/header';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Status } from '../../constants';
+import './add-review.css';
 
 function AddReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const movieId = Number(useParams().id);
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(fetchActiveMovieAction(movieId));
-  },[movieId, dispatch]);
+  }, [movieId, dispatch]);
 
   const movie = useAppSelector(getActiveMovie);
   const movieStatus = useAppSelector(getActiveMovieStatus);
@@ -27,7 +27,7 @@ function AddReview(): JSX.Element {
   }
 
   return (
-    <section className="film-card film-card--full" style={{background: movie.backgroundColor}}>
+    <section className="film-card film-card--full" style={{ background: movie.backgroundColor }}>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={movie.backgroundImage} alt="The Grand Budapest Hotel" />

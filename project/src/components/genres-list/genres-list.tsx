@@ -6,11 +6,11 @@ type Props = {
   activeLink: string;
 }
 
-function GenreList({handleChangeGenre, genres, activeLink}: Props) {
+function GenreList({ handleChangeGenre, genres, activeLink }: Props) {
   return (
     <ul className="catalog__genres-list">
       {genres.map((genre) => (
-        <GenreItem genre={genre} key={genre} handleChangeGenre={handleChangeGenre} activeLink={activeLink}/>
+        <GenreItem genre={genre} key={genre} handleChangeGenre={handleChangeGenre} activeLink={activeLink} />
       ))}
     </ul>
   );

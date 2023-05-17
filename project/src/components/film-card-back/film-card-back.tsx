@@ -1,15 +1,16 @@
-import { Link} from 'react-router-dom';
-import { AuthorizationStatus } from '../../constants';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user/selectors';
+import { AuthorizationStatus } from '../../constants';
 import FilmButtons from '../film-buttons/fillm-buttons';
-import { memo } from 'react';
 import { MovieProps } from '../../types/movie/movie';
 
 type Props = {
   movie: MovieProps;
 }
-function FilmCardBack({movie}: Props): JSX.Element {
+
+function FilmCardBack({ movie }: Props): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (

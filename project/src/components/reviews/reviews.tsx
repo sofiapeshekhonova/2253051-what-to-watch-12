@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { getALLReview, getALLReviewStatus } from '../../store/film/selectors';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import Review from '../review/review';
 
 function Reviews() {

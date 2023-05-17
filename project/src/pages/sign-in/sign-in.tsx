@@ -1,9 +1,19 @@
-import { Link } from 'react-router-dom';
-import Footer from '../../components/footer/footer';
-import { AppRoute } from '../../constants';
+import { Link, Navigate } from 'react-router-dom';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { useAppSelector } from '../../hooks';
 import SignInForm from '../../components/sign-in-form/sign-in-form';
+import Footer from '../../components/footer/footer';
+import { AppRoute, AuthorizationStatus } from '../../constants';
 
 function SignIn(): JSX.Element {
+  const authStatus = useAppSelector(getAuthorizationStatus);
+
+  if (authStatus === AuthorizationStatus.Auth) {
+    return (
+      <Navigate to={AppRoute.Main} />
+    );
+  }
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

@@ -7,8 +7,8 @@ type PrivateRouteProps = {
   children: JSX.Element;
 }
 
-export default function PrivateRoute({authorizationStatus, children}: PrivateRouteProps): JSX.Element {
-  if(authorizationStatus === AuthorizationStatus.Unknown) {
+export default function PrivateRoute({ authorizationStatus, children }: PrivateRouteProps): JSX.Element {
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <LoadingScreen />;
   }
   return authorizationStatus === AuthorizationStatus.Auth ? children : <Navigate to={AppRoute.Login} />;

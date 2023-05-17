@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, Status } from '../../constants';
-import { fetchActiveMovieAction, fetchSimilarMoviesAction, getMovieReview, postMovieReview } from '../api-actions';
+import { fetchActiveMovieAction, fetchPromoMovieAction, getMovieReview, postMovieReview } from '../api-actions';
 import { ReviewProps } from '../../types/review/review';
 import { MovieProps } from '../../types/movie/movie';
 
@@ -11,8 +11,7 @@ type InitialState = {
   status: string;
   statusFilm: string;
   activeFilm: MovieProps | null;
-  similarMovies: MovieProps[];
-  statusSimilarMovies: string;
+  movie: null | MovieProps;
 };
 
 const initialState: InitialState = {
@@ -22,8 +21,7 @@ const initialState: InitialState = {
   status: Status.Idle,
   statusFilm: Status.Idle,
   activeFilm: null,
-  similarMovies: [],
-  statusSimilarMovies: Status.Idle,
+  movie: null,
 };
 
 export const filmProcess = createSlice({
@@ -62,15 +60,15 @@ export const filmProcess = createSlice({
       .addCase(fetchActiveMovieAction.rejected, (state) => {
         state.statusFilm = Status.Failed;
       })
-      .addCase(fetchSimilarMoviesAction.pending, (state, action) => {
-        state.statusSimilarMovies = Status.Loading;
+      .addCase(fetchPromoMovieAction.pending, (state, action) => {
+        state.status = Status.Loading;
       })
-      .addCase(fetchSimilarMoviesAction.fulfilled, (state, action) => {
-        state.similarMovies = action.payload;
-        state.statusSimilarMovies = Status.Success;
+      .addCase(fetchPromoMovieAction.fulfilled, (state, action) => {
+        state.movie = action.payload;
+        state.status = Status.Success;
       })
-      .addCase(fetchSimilarMoviesAction.rejected, (state, action) => {
-        state.statusSimilarMovies = Status.Failed;
+      .addCase(fetchPromoMovieAction.rejected, (state, action) => {
+        state.status = Status.Failed;
       });
   }
 });

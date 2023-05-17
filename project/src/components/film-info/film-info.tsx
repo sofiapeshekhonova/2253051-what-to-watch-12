@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { LINKS } from '../../constants';
 import Overview from '../overview/overview';
 import Details from '../details/details';
@@ -11,9 +12,10 @@ type Props = {
 }
 
 function FilmInfo({ movie }: Props): JSX.Element {
-  const [activeLink, setActiveLink] = useState('Overview');
+  const params = useParams();
+  const [activeLink, setActiveLink] = useState(params.info || 'Overview');
 
-  const movieInformation = () => {//мемо не влияет
+  const movieInformation = () => {
     switch (activeLink) {
       case 'Overview':
         return <Overview movie={movie} />;
@@ -41,4 +43,3 @@ function FilmInfo({ movie }: Props): JSX.Element {
 }
 
 export default FilmInfo;
-//мемо не влияет

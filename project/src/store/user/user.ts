@@ -22,17 +22,17 @@ export const userProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.pending, (state, action) => {
+      .addCase(checkAuthAction.pending, (state) => {
         state.AuthorizationStatus = AuthorizationStatus.Unknown;
       })
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.AuthorizationStatus = AuthorizationStatus.Auth;
         state.userInformation = action.payload;
       })
-      .addCase(checkAuthAction.rejected, (state, action) => {
+      .addCase(checkAuthAction.rejected, (state) => {
         state.AuthorizationStatus = AuthorizationStatus.NoAuth;
       })
-      .addCase(loginAction.pending, (state, action) => {
+      .addCase(loginAction.pending, (state) => {
         state.status = Status.Loading;
         state.AuthorizationStatus = AuthorizationStatus.Unknown;
       })
@@ -41,15 +41,15 @@ export const userProcess = createSlice({
         state.AuthorizationStatus = AuthorizationStatus.Auth;
         state.userInformation = action.payload;
       })
-      .addCase(loginAction.rejected, (state, action) => {
+      .addCase(loginAction.rejected, (state) => {
         state.status = Status.Failed;
         state.AuthorizationStatus = AuthorizationStatus.NoAuth;
       })
-      .addCase(logoutAction.fulfilled, (state, action) => {
+      .addCase(logoutAction.fulfilled, (state) => {
         state.status = Status.Idle;
         state.AuthorizationStatus = AuthorizationStatus.NoAuth;
       })
-      .addCase(logoutAction.rejected, (state, action) => {
+      .addCase(logoutAction.rejected, (state) => {
         state.status = Status.Idle;
         state.AuthorizationStatus = AuthorizationStatus.NoAuth;
       });

@@ -8,6 +8,7 @@ export enum AppRoute {
   Player = '/player/:id',
   MyList = '/mylist',
   NotFoundPage = '*',
+  Info = ':info'
 }
 
 export enum AuthorizationStatus {
@@ -57,7 +58,8 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Comment = '/comments',
-  Promo = '/promo'
+  Promo = '/promo',
+  Favorites = '/favorite'
 }
 
 export enum NameSpace {
