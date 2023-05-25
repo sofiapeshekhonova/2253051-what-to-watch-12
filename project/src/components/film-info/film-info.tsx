@@ -13,15 +13,15 @@ type Props = {
 
 function FilmInfo({ movie }: Props): JSX.Element {
   const params = useParams();
-  const [activeLink, setActiveLink] = useState(params.info || 'Overview');
+  const [activeLink, setActiveLink] = useState(params.info || 'overview');
 
   const movieInformation = () => {
     switch (activeLink) {
-      case 'Overview':
+      case 'overview':
         return <Overview movie={movie} />;
-      case 'Details':
+      case 'details':
         return <Details movie={movie} />;
-      case 'Reviews':
+      case 'reviews':
         return <Reviews />;
       default:
         return <Overview movie={movie} />;

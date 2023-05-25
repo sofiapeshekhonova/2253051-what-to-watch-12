@@ -13,11 +13,10 @@ function FilmNav({ name, setActiveLink, activeLink}: Props) {
     setActiveLink(name);
   }
 
-  const className = `film-nav__item ${activeLink === name ? 'film-nav__item--active' : ''}`;
-
+  const className = `film-nav__item ${activeLink.toLowerCase() === name.toLowerCase() ? 'film-nav__item--active' : ''}`;
   return (
     <li className={className} onClick={handleClick}>
-      <Link to={name} className="film-nav__link">{name}</Link>
+      <Link to={name.toLowerCase()} className="film-nav__link">{name}</Link>
     </li>
   );
 }
