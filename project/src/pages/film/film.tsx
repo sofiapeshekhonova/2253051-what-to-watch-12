@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Status } from '../../constants';
 import ErrorScreen from '../error-screen/error-screen';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 function Film(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,7 +36,7 @@ function Film(): JSX.Element {
     );
   } else if (movie === null) {
     return(
-      <ErrorScreen />
+      <NotFoundScreen />
     );
   }
 
