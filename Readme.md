@@ -2,7 +2,7 @@
 Проект в рамках обучения в html academy. 
 «Что посмотреть» — онлайн кинотеатр нового поколения. Смотрите новинки абсолютно бесплатно и в лучшем качестве. Оставляйте отзывы, ставьте оценки и выбирайте только лучшее из мира большого кино.
 
-#### Ссылка на сайт: https://keks-project-1.vercel.app/Index
+#### Ссылка на сайт: https://what-to-watch-lake.vercel.app/
  
 ![Иллюстрация к проекту](https://up.htmlacademy.ru/assets/intensives/react/12/projects/what-to-watch/image.jpg?v=202306260501)
 
